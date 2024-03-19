@@ -1,10 +1,17 @@
 import { Dialog } from 'primereact/dialog'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Button } from 'primereact/button'
 import HeaderGroupButton from '@/components/buttons/header-group.button'
 
 export default function DraggyModal() {
-  const [visible, setVisible] = useState(false)
+  const [visible, setVisible] = useState<boolean>(false)
+  const [maximized, setMaximized] = useState<boolean>(false);
+  const [dialogKey, setDialogKey] = useState<number>(1);
+  useEffect(() => {
+    
+    setDialogKey(dialogKey+1);
+  },[maximized])
+  
   return (
     <>
       <Button
@@ -13,10 +20,18 @@ export default function DraggyModal() {
         onClick={() => setVisible(true)}
       />
       <Dialog
-        header={<HeaderGroupButton />}
+        className='bg-white dark:bg-gray-800'
+        header={
+          <HeaderGroupButton 
+            onClose={() => setVisible(false)}
+            onMaximize={() => setMaximized(true)}
+            onMinimize={() => setMaximized(false)}
+          />
+        }
+        maximized={maximized}
         visible={visible}
         modal={false}
-        closeIcon={<span className={"hidden"}></span>}
+        closeIcon={<></>}
         style={{ width: '50vw' }}
         onHide={() => setVisible(false)}
       >

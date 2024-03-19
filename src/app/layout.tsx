@@ -19,7 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={`${inter.className} bg-gradient-to-r from-purple-300 to-pink-100` }>
         <RecoilRootProvider>
           <RootLayoutWrapProvider>{children}</RootLayoutWrapProvider>
         </RecoilRootProvider>
