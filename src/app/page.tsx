@@ -1,5 +1,5 @@
 import Image from 'next/image'
 
 export default function Home() {
-  return <div className={'h-full'}>hihi</div>
+  return <div className={''}>main</div>
 }

@@ -2,6 +2,7 @@ import { Dialog } from 'primereact/dialog'
 import { useEffect, useState } from 'react'
 import { Button } from 'primereact/button'
 import HeaderGroupButton from '@/components/buttons/header-group.button'
+import Image from 'next/image'
 
 export default function DraggyModal() {
   const [visible, setVisible] = useState<boolean>(false)
@@ -14,13 +15,20 @@ export default function DraggyModal() {
   
   return (
     <>
-      <Button
+      {/* <Button
         label="Show"
         icon="pi pi-external-link"
         onClick={() => setVisible(true)}
+      /> */}
+      <Image
+        className=''
+        src={'/image/github.png'}
+        width={30}
+        height={30}
+        alt={'github'}      
       />
       <Dialog
-        className='bg-white dark:bg-gray-800'
+        className='bg-white dark:bg-gray-800 rounded-lg'
         header={
           <HeaderGroupButton 
             onClose={() => setVisible(false)}

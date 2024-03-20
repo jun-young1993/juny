@@ -4,16 +4,23 @@ import { ReactNode, useEffect } from 'react'
 import { ThemeType, useTheme } from '@/store/recoil/theme-mode.recoil'
 import NavBar from '@/components/root/navbar'
 import DraggyModal from '@/components/modal/draggy.modal'
+import MenuBar from '@/components/root/menu-bar'
 
 export default function RootLayoutWrapProvider({
   children,
 }: {
   children: ReactNode
 }) {
-  const { theme, setTheme } = useTheme()
-  const isSystemDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+  const { theme, setTheme } = useTheme();
+
+  let isSystemDark = false;
 
   useEffect(() => {
+    
+    if(typeof window !== undefined){
+      isSystemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    }
+
     setTheme(isSystemDark ? ThemeType.DARK : ThemeType.LIGHT)
   }, [])
 
@@ -25,12 +32,25 @@ export default function RootLayoutWrapProvider({
   }, [theme])
 
   return (
-    <main className="w-full min-h-screen">
-      <NavBar />
-      <div className={'h-full'}>{children}</div>
-      <DraggyModal />
-      <DraggyModal />
-      <DraggyModal />
+    <>
+    <header className='flex-none items-center justify-center'>
+      <div className="container mx-auto">
+        <NavBar />
+      </div>
+    </header>
+    {/* className grow tailwind 작동 안함 */}
+    <main className='flex items-center justify-center' style={{
+      flexGrow: 1
+    }}>
+      <div className='container mx-auto py-8'>
+        {children}
+      </div>
     </main>
+    <footer className='flex-none items-center justify-center'>
+      <div className="container mx-auto opacity-0">
+        <MenuBar />
+      </div>
+    </footer>
+  </>
   )
 }
