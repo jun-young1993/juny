@@ -46,10 +46,10 @@ export default function RootLayoutWrapProvider({
         {children}
       </div>
     </main>
-    <footer className='flex-none items-center justify-center'>
-      <div className="container mx-auto opacity-0">
+    <footer className='flex-none items-center justify-center h-[15%]'>
+      {/*<div className="container mx-auto opacity-0 h-full">*/}
         <MenuBar />
-      </div>
+      {/*</div>*/}
     </footer>
   </>
   )

@@ -4,6 +4,7 @@ import './globals.css'
 import RecoilRootProvider from '@/providers/only-rayout/recoil-root.provider'
 import RootLayoutWrapProvider from '@/providers/only-rayout/root-rayout-wrap.provider'
 import { ReactNode } from 'react'
+import {RecoilRoot} from "recoil";
 
 const inter = Inter({ subsets: ['latin'] })
 
