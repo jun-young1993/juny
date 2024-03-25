@@ -20,11 +20,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <RecoilRootProvider>
         <body className={`${inter.className} flex flex-col h-screen bg-gradient-to-r from-purple-300 to-pink-100 dark:from-purple-700 to-pink-500`}>
-          <RootLayoutWrapProvider>{children}</RootLayoutWrapProvider>
+          <RecoilRootProvider>
+            <RootLayoutWrapProvider>{children}</RootLayoutWrapProvider>
+          </RecoilRootProvider>
         </body>
-      </RecoilRootProvider>
     </html>
   )
 }
