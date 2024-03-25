@@ -1,49 +1,41 @@
 import { Dialog } from 'primereact/dialog'
-import { useEffect, useState } from 'react'
+import {ReactNode, useEffect, useState} from 'react'
 import HeaderGroupButton from '@/components/buttons/header-group.button'
 import _IMAGE from "@/defined/image";
 import Image from "next/image";
 import {useDraggyModal} from "@/store/recoil/draggy-modal.recoil";
+import {UnionsMenuType} from "@/types/menu.type";
 
 
+interface DraggyModalProps {
+    menuType: UnionsMenuType
+    children: ReactNode
+}
+export default function DraggyModal(props: DraggyModalProps) {
+    const {isDraggyModal, removeDraggyModal} = useDraggyModal();
+    const [maximized, setMaximized] = useState<boolean>(false);
 
-export default function DraggyModal() {
-    const {draggyModals} = useDraggyModal();
-  const [visible, setVisible] = useState<boolean>(false)
-  const [maximized, setMaximized] = useState<boolean>(false);
-  const [dialogKey, setDialogKey] = useState<number>(1);
-  useEffect(() => {
-    
-    setDialogKey(dialogKey+1);
-  },[maximized])
-
+    const menuType = props.menuType;
+    const isModal = isDraggyModal(menuType)
   return (
     <>
         <Dialog
             className='bg-white dark:bg-gray-800 rounded-lg'
             header={
                 <HeaderGroupButton
-                    onClose={() => setVisible(false)}
+                    onClose={() => removeDraggyModal(menuType)}
                     onMaximize={() => setMaximized(true)}
                     onMinimize={() => setMaximized(false)}
                 />
             }
             maximized={maximized}
-            visible={visible}
+            visible={isModal}
             modal={false}
             closeIcon={<></>}
             style={{ width: '50vw' }}
-            onHide={() => setVisible(false)}
+            onHide={() => removeDraggyModal(menuType)}
         >
-            <p className="m-0">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                aliquip ex ea commodo consequat. Duis aute irure dolor in
-                reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                culpa qui officia deserunt mollit anim id est laborum.
-            </p>
+            {props.children}
         </Dialog>
     </>
   )
