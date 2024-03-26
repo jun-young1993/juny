@@ -3,6 +3,7 @@ import _IMAGE from "@/defined/image";
 import Image from "next/image";
 import { useDraggyModal } from "@/store/recoil/draggy-modal.recoil";
 import {MenuType} from "@/types/menu.type";
+import { GithubModal } from "../modal/github.modal";
 
 export default function MenuBar(){
 	const { pushDraggyModal, draggyModals } = useDraggyModal();
@@ -16,7 +17,7 @@ export default function MenuBar(){
 	return (
 		<div className={"w-full h-full flex justify-center"}>
 			<div
-				className={`w-11/12  h-1/2 rounded-lg border-solid border-2 border-inherit`}
+				className={`w-11/12  h-1/2 rounded-lg border-solid border-2 border-inherit dark:border-slate-200`}
 				style={{
 					minHeight: `${borderMinHeight}px`
 				}}
@@ -31,13 +32,7 @@ export default function MenuBar(){
 							alt={'github'}
 						/>
 				</div>
-				<DraggyModal
-					menuType={MenuType.GITHUB}
-				>
-					<div>
-						test
-					</div>
-				</DraggyModal>
+				<GithubModal />
 			</div>
 		</div>
 
