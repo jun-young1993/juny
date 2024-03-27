@@ -17,9 +17,11 @@ export default function DraggyModal(props: DraggyModalProps) {
 
     const menuType = props.menuType;
     const isModal = isDraggyModal(menuType)
+    console.log(maximized);
   return (
     <>
         <Dialog
+            key={`${maximized}`}
             className='bg-white dark:bg-gray-800 rounded-lg'
             header={
                 <HeaderGroupButton

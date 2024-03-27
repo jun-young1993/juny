@@ -1,3 +1,5 @@
+'use client';
+
 import { useState } from 'react'
 
 // 종료 버튼 아이콘 컴포넌트

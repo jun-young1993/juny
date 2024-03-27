@@ -39,7 +39,7 @@ export default function RootLayoutWrapProvider({
       </div>
     </header>
     {/* className grow tailwind 작동 안함 */}
-    <main className='flex items-center justify-center' style={{
+    <main className='flex justify-center' style={{
       flexGrow: 1
     }}>
       <div className='container mx-auto py-8'>
