@@ -1,14 +1,13 @@
 import { MenuType } from "@/types/menu.type";
 import DraggyModal from "./draggy.modal";
+import BlogContent from "../contents/blog.content";
 
-export function GithubModal(){
+export function BlogModal(){
 	return (
 		<DraggyModal
-			menuType={MenuType.GITHUB}
+			menuType={MenuType.BLOG}
 		>
-			<div>
-				test
-			</div>
+			<BlogContent />
 		</DraggyModal>
 	)
 }

@@ -4,6 +4,7 @@ import { ObsidianContentsByBlog } from '@/lib/client/obsidian.client';
 import { BlogContentInterface } from '@/types/blog.type';
 
 import { MenuType } from '@/types/menu.type';
+import { useRouter } from 'next/router';
 
 async function getData(): Promise<BlogContentInterface[]> {
   const res = await ObsidianContentsByBlog();
@@ -13,15 +14,20 @@ async function getData(): Promise<BlogContentInterface[]> {
   return res;  
 }
 
-export default async function Page(){
-  const data = await getData();
-  
-  return (
-      <ContainerLayout 
-        children={
-          <BlogContent data={data} />
-        } 
-        title={MenuType.BLOG} 
-      />
-  )
+// export default async function Page(){
+//   const data = await getData();
+//   const router = useRouter();
+//   console.log(router.query.slug);
+//   return (
+//       <ContainerLayout 
+//         children={
+//           <BlogContent data={data} />
+//         } 
+//         title={MenuType.BLOG} 
+//       />
+//   )
+// }
+export default function Page() {
+  const router = useRouter()
+  return <p>Post: {router.query.slug}</p>
 }

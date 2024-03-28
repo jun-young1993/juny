@@ -97,7 +97,10 @@ interface HeaderGroupButton{
   onMinimize?: () => void
   onMaximize?: () => void
   maximized?: boolean
+  title?: string
+  className?: string
 }
+
 export default function HeaderGroupButton(props: HeaderGroupButton) {
   const buttonClassName: string = `rounded-full w-5 h-5 text-center flex items-center justify-center`
   const [hiddenClass, setHiddenClass] = useState<'' | 'hidden'>('hidden');
@@ -108,29 +111,38 @@ export default function HeaderGroupButton(props: HeaderGroupButton) {
   }
   return (
     <div
-      className="flex justify-self-start ml-3 mt-2 mb-2 gap-3 hover:cursor-pointer mb-3 dark:bg-gray-700"
+      className={`flex justify-self-start pl-3 mt-2 mb-2 hover:cursor-pointer mb-3 dark:bg-gray-700 w-full ${props.className}`}
       onMouseOver={() => setHiddenClass('')}
       onMouseOut={() => setHiddenClass('hidden')}
     >
-      <div className={`${buttonClassName} bg-red-400`} onClick={() => {
-        props.onClose && props.onClose();
-      }}>
-        <span className={`text-xs ${hiddenClass}`}>
-          <CloseButtonIcon />
-        </span>
+      <div className='flex justify-between w-full'>
+        <div className='flex justify-start gap-3'>
+          <div className={`${buttonClassName} bg-red-400`} onClick={() => {
+            props.onClose && props.onClose();
+          }}>
+            <span className={`text-xs ${hiddenClass}`}>
+              <CloseButtonIcon />
+            </span>
+          </div>
+          <div className={`${buttonClassName} bg-yellow-400`} onClick={props.onHidden}>
+            <span className={`text-xs ${hiddenClass}`}>
+              <HiddenButtonIcon />
+            </span>
+          </div>
+          <div className={`${buttonClassName} bg-green-400`} onClick={handleMaximized}>
+            <span className={`text-xs ${hiddenClass}`}>
+              {maximized
+              ? <MinimizeButtonIcon />
+              : <MaximizeButtonIcon />}
+            </span>
+          </div>
+        </div>
+        <div className='font-mono font-bold pr-5 dark:text-slate-100'>
+            {props.title}
+        </div>
       </div>
-      <div className={`${buttonClassName} bg-yellow-400`} onClick={props.onHidden}>
-        <span className={`text-xs ${hiddenClass}`}>
-          <HiddenButtonIcon />
-        </span>
-      </div>
-      <div className={`${buttonClassName} bg-green-400`} onClick={handleMaximized}>
-        <span className={`text-xs ${hiddenClass}`}>
-          {maximized
-          ? <MinimizeButtonIcon />
-          : <MaximizeButtonIcon />}
-        </span>
-      </div>
+   
+
     </div>
   )
 }
