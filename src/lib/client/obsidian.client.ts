@@ -17,11 +17,13 @@ async function ObsidianContents(path?: string ): Promise<BlogContentInterface[] 
 		throw new Error(res.statusText);
 	}
 
+
 	return res.json();
 }
 
 export async function ObsidianContentsByBlog(path?: string)
 {
-	return await ObsidianContents(`blog/${path ? path : ''}`);
+	const data = await ObsidianContents(`blog/${path ? path : ''}`);
+
+	return data;
 }
-// pages/shop/[...slug].js

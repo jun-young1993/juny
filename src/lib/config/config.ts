@@ -1,6 +1,13 @@
 import { getEnv } from "./get-value.config";
 import { GithubObsidianConfig } from "./type.config";
 
+export const URL = 'http://localhost:3000';
+export const API_URL = (path: string) => {
+	return `${URL}/api${path}`;
+}
+
+
+
 export const GITHUB_API_URL: string = getEnv('GIT_HUB_API_URL');
 export const GITHUB_OBSIDIAN_CONFIG: GithubObsidianConfig = {
 	token: getEnv('GIT_HUB_OBSIDIAN_TOKE'),
@@ -10,3 +17,4 @@ export const GITHUB_OBSIDIAN_CONFIG: GithubObsidianConfig = {
 	email:  getEnv('GIT_HUB_OBSIDIAN_EMAIL'),
 	name:  getEnv('GIT_HUB_OBSIDIAN_NAME'),
 }
+

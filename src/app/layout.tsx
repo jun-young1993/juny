@@ -5,6 +5,8 @@ import RecoilRootProvider from '@/providers/only-rayout/recoil-root.provider'
 import RootLayoutWrapProvider from '@/providers/only-rayout/root-rayout-wrap.provider'
 import { ReactNode } from 'react'
 import {RecoilRoot} from "recoil";
+import {GithubModal} from "@/components/modal/github.modal";
+import {BlogModal} from "@/components/modal/blog.modal";
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -20,7 +22,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-        <body className={`${inter.className} flex flex-col h-screen bg-gradient-to-r from-purple-300 to-pink-100 dark:from-purple-700 to-pink-500`}>
+        <body
+            className={`${inter.className} flex flex-col h-screen bg-gradient-to-r from-purple-300 to-pink-100 dark:from-purple-700 to-pink-500`}
+        >
           <RecoilRootProvider>
             <RootLayoutWrapProvider>{children}</RootLayoutWrapProvider>
           </RecoilRootProvider>

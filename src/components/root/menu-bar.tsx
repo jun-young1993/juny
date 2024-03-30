@@ -52,10 +52,9 @@ export default function MenuBar(){
 				<MenuIcon 
 					size={imageSize} src={_IMAGE.BLOG} menu={MenuType.BLOG}						
 				/>
-				
+				<GithubModal />
+				<BlogModal />
 			</div>
-			<GithubModal />
-			<BlogModal />
 		</div>
 
 	)

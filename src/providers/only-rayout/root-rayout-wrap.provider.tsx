@@ -5,6 +5,8 @@ import { ThemeType, useTheme } from '@/store/recoil/theme-mode.recoil'
 import NavBar from '@/components/root/navbar'
 import DraggyModal from '@/components/modal/draggy.modal'
 import MenuBar from '@/components/root/menu-bar'
+import {GithubModal} from "@/components/modal/github.modal";
+import {BlogModal} from "@/components/modal/blog.modal";
 
 export default function RootLayoutWrapProvider({
   children,
@@ -16,7 +18,7 @@ export default function RootLayoutWrapProvider({
   let isSystemDark = false;
 
   useEffect(() => {
-    
+
     if(typeof window !== undefined){
       isSystemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     }
