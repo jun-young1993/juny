@@ -30,7 +30,7 @@ export default function BlogContent(props: BlogContentProps){
 			<Link href={basePath}>blog</Link>
 			{generatePaths(props.path ?? '').map((path,index) => {
 				const currentPath = props.path.split('/')[index];
-				return <Link key={`${basePath}/${path}`} href={`${basePath}/${path}`}>/{currentPath}</Link>
+				return <Link className="ml-1" key={`${basePath}/${path}`} href={`${basePath}/${path}`}>/{currentPath}</Link>
 			})}
 		</h2>
 			<ul>
