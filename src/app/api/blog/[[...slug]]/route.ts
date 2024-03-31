@@ -21,7 +21,7 @@ export async function GET(request: Request, { params }: Params)
     const res = await fetch(url,{
         headers: {
             'Authorization': `Bearer ${GITHUB_OBSIDIAN_CONFIG.token}`,
-            'Accept': 'application/vnd.github.html+json',
+            'Accept': 'application/vnd.github+json',
             'X-GitHub-Api-Version': GITHUB_OBSIDIAN_CONFIG.version
         }
     })
@@ -30,9 +30,49 @@ export async function GET(request: Request, { params }: Params)
         throw new Error(res.statusText);
     }
 
-    const data = await res.json();
+    const data: BlogContentInterface[] = await res.json();
 
-    return NextResponse.json(data,{
+    const formattedData: BlogContentInterface[] = [];
+    for(const item of data){
+
+        let content: BlogContentInterface['content'] = null;
+        if(item.type === 'file'){
+
+            const contentRes = await fetch(item.download_url,{
+                headers: {
+                    'Authorization': `Bearer ${GITHUB_OBSIDIAN_CONFIG.token}`,
+                    'Accept': 'application/vnd.github+json',
+                    'X-GitHub-Api-Version': GITHUB_OBSIDIAN_CONFIG.version
+                }
+            });
+            content = await contentRes.text();
+            const markdownRes = await fetch(`${GITHUB_API_URL}/markdown`,{
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${GITHUB_OBSIDIAN_CONFIG.token}`,
+                    'Accept': 'application/vnd.github+json',
+                    'X-GitHub-Api-Version': GITHUB_OBSIDIAN_CONFIG.version
+                },
+                body: JSON.stringify({
+                    text: content
+                })
+            });
+            content = await markdownRes.text();
+        }
+
+        const formattedItem: BlogContentInterface = {
+            name: item.name,
+            path: item.path,
+            type: item.type,
+            content: content,
+            download_url: item.download_url
+        };
+
+        formattedData.push(formattedItem);
+    }
+
+
+    return NextResponse.json(formattedData,{
         status: constants.HTTP_STATUS_OK,
     });
 }
