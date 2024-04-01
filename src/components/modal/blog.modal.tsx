@@ -23,6 +23,7 @@ export function BlogModal(){
 			<BlogContent
 				data={data}
 				path={''}
+				modal={true}
 			/>
 		</DraggyModal>
 	)

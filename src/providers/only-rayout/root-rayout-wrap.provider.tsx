@@ -34,15 +34,16 @@ export default function RootLayoutWrapProvider({
   }, [theme])
 
   return (
-    <>
+    <div className='flex flex-col'>
     <header className='flex-none items-center justify-center'>
       <div className="container mx-auto">
         <NavBar />
       </div>
     </header>
     {/* className grow tailwind 작동 안함 */}
-    <main className='flex justify-center' style={{
-      flexGrow: 1
+    <main className='flex justify-center h-full' style={{
+      flexGrow: 1,
+      height: '80%'
     }}>
       <div className='container mx-auto py-8'>
         {children}
@@ -53,6 +54,6 @@ export default function RootLayoutWrapProvider({
         <MenuBar />
       {/*</div>*/}
     </footer>
-  </>
+  </div>
   )
 }

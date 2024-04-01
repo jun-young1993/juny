@@ -28,7 +28,7 @@ export default async function Page({ params }:Params){
     const data = await getData(
         path
     );
-    console.log("=>(page.tsx:32) data", data);
+    
 
   return (
       <ContainerLayout
