@@ -1,7 +1,7 @@
 import {Unions} from "@/types/union.type";
 
 export const MenuType = {
-    GITHUB : 'GITHUB',
+    GITHUB : 'github',
     BLOG: 'blog'
 
 } as const;

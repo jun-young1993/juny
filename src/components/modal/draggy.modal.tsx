@@ -5,16 +5,19 @@ import _IMAGE from "@/defined/image";
 import Image from "next/image";
 import {useDraggyModal} from "@/store/recoil/draggy-modal.recoil";
 import {UnionsMenuType} from "@/types/menu.type";
+import { useRouter } from 'next/navigation';
+import { BlogPath } from '@/defined/blog.defined';
 
 
 interface DraggyModalProps {
     menuType: UnionsMenuType
     children: ReactNode
+    onMaximize?: () => void
 }
 export default function DraggyModal(props: DraggyModalProps) {
     const {isDraggyModal, removeDraggyModal} = useDraggyModal();
-    const [maximized, setMaximized] = useState<boolean>(false);
-
+    
+    
     const menuType = props.menuType;
     const isModal = isDraggyModal(menuType)
     
@@ -27,15 +30,17 @@ export default function DraggyModal(props: DraggyModalProps) {
                         className='dark:bg-gray-800'
                         title={menuType}
                         onClose={() => removeDraggyModal(menuType)}
-                        onMaximize={() => setMaximized(true)}
-                        onMinimize={() => setMaximized(false)}
+                        onMaximize={() => {
+                            removeDraggyModal(menuType);
+                            props?.onMaximize && props.onMaximize();
+                        }}
                     />
                 }
-                maximized={maximized}
+                maximized={false}
                 visible={isModal}
                 modal={false}
                 closeIcon={<></>}
-                style={{ width: '50vw' }}
+                style={{ width: '60vw', height: '50vh' }}
                 onHide={() => removeDraggyModal(menuType)}
             >
                 <div className='w-full h-full p-3'>

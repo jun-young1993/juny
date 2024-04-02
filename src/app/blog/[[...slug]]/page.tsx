@@ -38,8 +38,8 @@ export default async function Page({ params }:Params){
               path={path ?? ''}
           />
         }
+        type={MenuType.BLOG}
         title={MenuType.BLOG}
-        path={path ?? 'blog'}
       />
   )
 }

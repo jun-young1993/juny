@@ -3,26 +3,30 @@
 import { ReactNode } from "react";
 import HeaderGroupButton from "../buttons/header-group.button";
 import { useRouter } from "next/navigation";
+import { MenuType, UnionsMenuType } from "@/types/menu.type";
+import { useDraggyModal } from "@/store/recoil/draggy-modal.recoil";
+
 
 interface ContainerLayoutInterface {
 	children: ReactNode
 	title?: string
+	type?: UnionsMenuType
 }
 export default function ContainerLayout(props: ContainerLayoutInterface){
 	const router = useRouter();
+	const { pushDraggyModal } = useDraggyModal();
 	return (
 		<div className='w-full h-full bg-slate-100 dark:bg-gray-700 rounded-lg'> 
 			<div className="w-full dark:bg-gray-700 pt-3 rounded-lg">
 				<HeaderGroupButton
+					maximized={true}
 					title={props.title}
 					onClose={() => {
 						router.push('/')
 					}}
-					onMaximize={() => {
-
-					}}
 					onMinimize={() => {
-
+						pushDraggyModal(props.type);
+						router.push('/')
 					}}
 				/>
 			</div>

@@ -36,9 +36,9 @@ export function usePushDraggyModal() {
     const isDraggyModal = useIsDraggyModal();
     return useRecoilCallback(
         ({snapshot, set}) =>
-            (menu: UnionsMenuType) => {
+            (menu?: UnionsMenuType) => {
                 const draggyModals = snapshot.getLoadable(draggyModalsAtom).getValue();
-                if(!isDraggyModal(menu)){
+                if(menu && !isDraggyModal(menu)){
                     set(draggyModalsAtom,[...draggyModals, menu]);
                 }
             }
