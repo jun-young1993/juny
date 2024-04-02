@@ -1,5 +1,5 @@
 import { getEnv } from "./get-value.config";
-import { GithubObsidianConfig } from "./type.config";
+import { GithubConfig, GithubObsidianConfig } from "./type.config";
 
 export const URL = 'http://localhost:3000';
 export const API_URL = (path: string) => {
@@ -16,5 +16,13 @@ export const GITHUB_OBSIDIAN_CONFIG: GithubObsidianConfig = {
 	version:  getEnv('GIT_HUB_OBSIDIAN_API_VERSION'),
 	email:  getEnv('GIT_HUB_OBSIDIAN_EMAIL'),
 	name:  getEnv('GIT_HUB_OBSIDIAN_NAME'),
+}
+export const GITHUB_CONFIG: GithubConfig = {
+	token: getEnv('GIT_HUB_TOKE'),
+	owner: getEnv('GIT_HUB_OWNER'),
+	repo:  getEnv('GIT_HUB_REPO'),
+	version:  getEnv('GIT_HUB_API_VERSION'),
+	email:  getEnv('GIT_HUB_EMAIL'),
+	name:  getEnv('GIT_HUB_NAME'),
 }
 

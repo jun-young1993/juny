@@ -1,4 +1,4 @@
-export interface GithubObsidianConfig {
+export interface GithubConfig {
 	token: string
 	owner: string
 	repo: string
@@ -6,3 +6,4 @@ export interface GithubObsidianConfig {
 	email: string
 	name: string
 }
+export interface GithubObsidianConfig extends GithubConfig{};

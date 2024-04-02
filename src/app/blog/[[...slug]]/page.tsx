@@ -4,6 +4,7 @@ import { BlogContentInterface } from '@/types/blog.type';
 import { MenuType } from '@/types/menu.type';
 import {API_URL} from "@/lib/config/config";
 import _ from "lodash"
+import { BlogPath } from '@/defined/blog.defined';
 
 type Params = {
     slug?: [] | string[]
@@ -12,7 +13,7 @@ type Params = {
 async function getData(path?: string): Promise<BlogContentInterface[]> {
     const dynamicPath = path ? path : '';
 
-  const res = await fetch(API_URL(`/blog/${dynamicPath}`),{
+  const res = await fetch(API_URL(`${BlogPath}/${dynamicPath}`),{
       method: 'GET',
        next: { tags: dynamicPath.split('/') }
   });
