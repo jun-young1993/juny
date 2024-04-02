@@ -6,8 +6,10 @@ import {API_URL} from "@/lib/config/config";
 import _ from "lodash"
 import { BlogPath } from '@/defined/blog.defined';
 
-type Params = {
+interface Params {
+  params: {
     slug?: [] | string[]
+  }
 }
 
 async function getData(path?: string): Promise<BlogContentInterface[]> {

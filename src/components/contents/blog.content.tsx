@@ -2,7 +2,7 @@
 import { BlogPath, _BLOG_CONTENT_TYPE } from "@/defined/blog.defined";
 import { BlogContentInterface } from "@/types/blog.type"
 import Link from "next/link";
-import { ReactNode, ReactNode, useState } from "react";
+import { ReactNode, useState } from "react";
 import { FileIcon, FolderIcon } from "../icons/svg.icon";
 import _ from "lodash";
 

@@ -8,9 +8,9 @@ import _ from "lodash";
 
 
 type Params = {
-
-    slug?: [] | string[]
-
+    params: {
+        slug?: [] | string[]
+    }    
 }
 export async function GET(request: Request, { params }: Params)
 {
