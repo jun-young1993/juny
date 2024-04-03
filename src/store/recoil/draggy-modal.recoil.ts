@@ -26,8 +26,8 @@ export function useIsDraggyModal(){
         ({snapshot, set}) =>
             (menu: UnionsMenuType) => {
                 const draggyModals = snapshot.getLoadable(draggyModalsAtom).getValue();
-                const isDraggyModal = draggyModals.indexOf(menu);
-                return isDraggyModal === -1 ? false : true;
+                return draggyModals.includes(menu as never);
+                
             }
     )
 }
