@@ -18,7 +18,7 @@ export default async function Page(){
   return (
       <ContainerLayout
         children={
-		<GithubContent content={data.content} />
+		      <GithubContent content={data.content} />
         }
         type={MenuType.GITHUB}
         title={MenuType.GITHUB}
