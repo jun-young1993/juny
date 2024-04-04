@@ -14,7 +14,7 @@ interface Params {
 
 async function getData(path?: string): Promise<BlogContentInterface[]> {
     const dynamicPath = path ? path : '';
-  console.log('page.tsx:17',API_URL(`${BlogPath}/${dynamicPath}`);
+  console.log('page.tsx:17',API_URL(`${BlogPath}/${dynamicPath}`));
   const res = await fetch(API_URL(`${BlogPath}/${dynamicPath}`),{
       method: 'GET',
        next: { tags: dynamicPath.split('/') }
