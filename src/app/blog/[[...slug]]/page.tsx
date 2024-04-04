@@ -19,6 +19,7 @@ async function getData(path?: string): Promise<BlogContentInterface[]> {
       method: 'GET',
        next: { tags: dynamicPath.split('/') }
   });  
+  console.log('page.tsx:12',res.status, res.statusText);
 
   const result = await res.json();
 
