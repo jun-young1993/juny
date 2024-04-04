@@ -19,6 +19,7 @@ export async function GET(request: Request, { params }: Params)
     console.log('router.ts: 19',GITHUB_OBSIDIAN_CONFIG);
     console.log('router.ts: 20',GITHUB_API_URL);
     const url = `${GITHUB_API_URL}/repos/${GITHUB_OBSIDIAN_CONFIG.owner}/${GITHUB_OBSIDIAN_CONFIG.repo}/contents/blog/${path}`;
+    console.log('router.ts: 22',url);
     const res = await fetch(url,{
         headers: {
             'Authorization': `Bearer ${GITHUB_OBSIDIAN_CONFIG.token}`,
@@ -73,7 +74,7 @@ export async function GET(request: Request, { params }: Params)
         formattedData.push(formattedItem);
     }
 
-
+    console.log('router.ts: 77',res.status);
     return NextResponse.json(formattedData,{
         status: constants.HTTP_STATUS_OK,
     });
