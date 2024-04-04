@@ -34,7 +34,7 @@ export async function GET(request: Request, { params }: Params)
 
     const formattedData: BlogContentInterface[] = [];
     for(const item of data){
-
+        console.log(item);
         let content: BlogContentInterface['content'] = null;
         if(item.type === 'file'){
 
