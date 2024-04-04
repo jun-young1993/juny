@@ -16,7 +16,7 @@ export async function GET(request: Request, { params }: Params)
 {
 
     const path = params.slug ? _.join(params.slug,'/') : '';
-
+    console.log('router.ts: 19',GITHUB_OBSIDIAN_CONFIG);
     const url = `${GITHUB_API_URL}/repos/${GITHUB_OBSIDIAN_CONFIG.owner}/${GITHUB_OBSIDIAN_CONFIG.repo}/contents/blog/${path}`;
     const res = await fetch(url,{
         headers: {
