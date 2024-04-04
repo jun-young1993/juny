@@ -1,7 +1,7 @@
 import { getEnv } from "./get-value.config";
 import { GithubConfig, GithubObsidianConfig } from "./type.config";
 
-export const URL = getEnv('NEXT_PUBLIC_VERCEL_URL');
+export const URL = getEnv('VERCEL_URL');
 export const PROTOCOL = getEnv('NEXT_PUBLIC_API_PROTOCOL');
 export const API_URL = (path: string) => {
 	return `${PROTOCOL}${URL}/api${path}`;
