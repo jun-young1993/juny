@@ -18,6 +18,7 @@ export const GITHUB_OBSIDIAN_CONFIG: GithubObsidianConfig = {
 	email:  getEnv('NEXT_PUBLIC_GIT_HUB_OBSIDIAN_EMAIL'),
 	name:  getEnv('NEXT_PUBLIC_GIT_HUB_OBSIDIAN_NAME'),
 }
+
 export const GITHUB_CONFIG: GithubConfig = {
 	token: getEnv('NEXT_PUBLIC_GIT_HUB_TOKE'),
 	owner: getEnv('NEXT_PUBLIC_GIT_HUB_OWNER'),
