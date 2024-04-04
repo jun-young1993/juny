@@ -20,7 +20,7 @@ async function getData(path?: string): Promise<BlogContentInterface[]> {
        next: { tags: dynamicPath.split('/') }
   });
 
-  console.log(res.text());
+  console.log(await res.text());
 
   const result = await res.json();
 
