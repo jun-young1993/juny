@@ -1,8 +1,22 @@
 import moment from "moment";
-export function getDaysInMonth(month: number) : string[]
+
+/**
+ * 특정 월의 시작일부터 종료일까지의 날짜 배열을 반환합니다.
+ * 
+ * @typedef {Object} Moment
+ * @see {@link https://momentjs.com/ Moment.js}
+ * 
+ * @param {number} year - 년도를 나타내는 숫자
+ * @param {number} month - 월을 나타내는 숫자 (1부터 12까지의 숫자)
+ * 
+ * @returns {string[]} 해당 월의 날짜 배열 예: ['YYYY-MM-DD', 'YYYY-MM-DD', ...]
+ */
+export function getDaysInMonth(year:number, month: number) : string[]
 {
-	// month는 1부터 12까지의 숫자여야 합니다.
-	const startDate = moment(`${month}-01`, 'MM-DD');
+	/** @type {Moment} */
+	const startDate = moment(`${month}-01`, 'YYYY-MM-DD');
+
+	/** @type {Moment} */
 	const endDate = startDate.clone().endOf('month');
 	
 	const days = [];
@@ -14,4 +28,8 @@ export function getDaysInMonth(month: number) : string[]
 	}
 	
 	return days;
+}
+
+export function getPrevMonth(){
+
 }
