@@ -4,11 +4,7 @@ export function getEnv(
 	env = process.env
 ): string {
 	const value = env[key]
-	const publicValue = env[`NEXT_PUBLIC_${key}`];
-	if(publicValue !== undefined){
-		return publicValue;
-	}
-
+	
 	if (value !== undefined) {
 		return value
 	}

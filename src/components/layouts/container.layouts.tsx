@@ -30,7 +30,7 @@ export default function ContainerLayout(props: ContainerLayoutInterface){
 					}}
 				/>
 			</div>
-			<div className='w-full h-full p-3'>
+			<div className='w-full h-[90%] p-3 overflow-y-scroll'>
 				{props.children}
 			</div>
 	      </div>

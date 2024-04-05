@@ -6,7 +6,6 @@ import {constants} from "http2";
 import _ from "lodash";
 
 
-
 type Params = {
     params: {
         slug?: [] | string[]
@@ -16,10 +15,9 @@ export async function GET(request: Request, { params }: Params)
 {
 
     const path = params.slug ? _.join(params.slug,'/') : '';
-    console.log('router.ts: 19',GITHUB_OBSIDIAN_CONFIG);
-    console.log('router.ts: 20',GITHUB_API_URL);
+    
     const url = `${GITHUB_API_URL}/repos/${GITHUB_OBSIDIAN_CONFIG.owner}/${GITHUB_OBSIDIAN_CONFIG.repo}/contents/blog/${path}`;
-    console.log('router.ts: 22',url);
+
     const res = await fetch(url,{
         headers: {
             'Authorization': `Bearer ${GITHUB_OBSIDIAN_CONFIG.token}`,
@@ -29,8 +27,6 @@ export async function GET(request: Request, { params }: Params)
     })
 
     if(res.status !== constants.HTTP_STATUS_OK){
-        console.log('router.ts: 30',res.status);
-        console.log('router.ts: 30',await res.text());
         throw new Error(res.statusText);
     }
 
@@ -74,7 +70,6 @@ export async function GET(request: Request, { params }: Params)
         formattedData.push(formattedItem);
     }
 
-    console.log('router.ts: 77',res.status);
     return NextResponse.json(formattedData,{
         status: constants.HTTP_STATUS_OK,
     });
