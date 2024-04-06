@@ -14,8 +14,5 @@ export function getEnv(
 		return defaultValue
 	}
 
-
-
-	console.log("=>(get-value.config.ts:16) process.env", process.env);
 	throw new Error(`Config error: missing required env variable "${key}"`)
 }

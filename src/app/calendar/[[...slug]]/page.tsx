@@ -1,13 +1,14 @@
 import ContainerLayout from "@/components/layouts/container.layouts"
-import { getDaysInMonth } from "@/lib/utils/date.util";
 import { MenuType } from "@/types/menu.type"
 import { MultiSegmentPageParams } from "@/types/next.type"
-
+import { getDaysInMonth } from "juny-tsutil";
 
 export default async function Page({ params }: MultiSegmentPageParams){
-	
+
+
+
 	return (
-		<ContainerLayout 
+		<ContainerLayout
 			type={MenuType.CALENDAR}
 			title={MenuType.CALENDAR}
 		>
