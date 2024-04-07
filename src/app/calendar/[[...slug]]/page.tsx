@@ -12,8 +12,8 @@ export default async function Page({ params }: MultiSegmentPageParams){
 			type={MenuType.CALENDAR}
 			title={MenuType.CALENDAR}
 		>
-			{getDaysInMonth(2023,2).map((day) => {
-				return <div>${day}</div>
+			{getDaysInMonth(2023,4).map((day) => {
+				return <div>${day.toString()}</div>
 			})}
 		</ContainerLayout>
 	)

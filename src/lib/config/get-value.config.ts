@@ -3,7 +3,7 @@ export function getEnv(
 	defaultValue?: string,
 	env = process.env
 ): string {
-	const value = env[key]
+	const value: string | undefined = env[key]
 	
 	if (value !== undefined) {
 		return value
