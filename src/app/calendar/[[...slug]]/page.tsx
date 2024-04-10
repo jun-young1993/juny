@@ -44,7 +44,7 @@ export default async function Page({ params }: MultiSegmentPageParams){
 		const dataPath: string = `${year}/${month}/${day}`;
 		const calendarForDayData = await getData(dataPath);
 
-		console.log("=>(page.tsx:47) calendarForDayData", calendarForDayData);
+
 		result[day] = calendarForDayData;
 	}
 
