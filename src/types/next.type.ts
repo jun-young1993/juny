@@ -6,6 +6,13 @@ export interface NextPageCatchAllSegmentProps
 
 export interface MultiSegmentPageParams {
     params: {
-        slug?: [] | string[]
-      }
+        slug?: [] | string[] | undefined
+    }
 }
+
+export interface MultiSegmentApiParams {
+    params: {
+        slug?: [] | string[] | undefined
+    }
+}
+

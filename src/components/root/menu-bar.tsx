@@ -50,7 +50,7 @@ export default function MenuBar(){
 				<MenuIcon size={imageSize} src={_IMAGE.GITHUB} menu={MenuType.GITHUB} />
 				<MenuIcon size={imageSize} src={_IMAGE.BLOG} menu={MenuType.BLOG} />
 				<MenuIcon size={imageSize} src={_IMAGE.CALENDAR} menu={MenuType.CALENDAR} />
-				<GithubModal />
+				{/*<GithubModal />*/}
 				<BlogModal />
 			</div>
 		</div>
