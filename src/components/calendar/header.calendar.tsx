@@ -5,6 +5,7 @@ import {useRouter} from "next/navigation";
 import {MenuType} from "@/types/menu.type";
 import {useEffect, useRef, useState} from "react";
 import {DATE_UNIT} from "@/defined/date.defined";
+import { fillWord } from "juny-tsutil";
 
 interface HeaderCalendarProps {
     year: number
@@ -83,7 +84,7 @@ export default function HeaderCalendar({
                     </div>
                      -
                     <div className={"hover:border hover:border-indigo-300"} onClick={() => setClicked(DATE_UNIT.MONTH)}>
-                        {monthState}
+                        {fillWord(monthState.toString(),2,"0")}
                     </div>
                 </div>
             <button className="btn btn-circle btn-xs" onClick={() => {

@@ -3,33 +3,31 @@ import { BlogContentInterface } from "@/types/blog.type";
 import {constants} from "http2";
 import {NotFoundApiException} from "@/exceptions/not-found-api.exception";
 import {instanceOf} from "prop-types";
+import { GithubContentInterface } from "@/types/github.type";
+import { BlogPath, _BLOG_CONTENT_TYPE } from "@/defined/blog.defined";
+import { CalendarPath } from "@/defined/calendar.defined";
+import { GithubContentString, GithubContents } from "./github.client";
+import _ from "lodash";
 
-async function ObsidianContents(path?: string ): Promise<BlogContentInterface[] | []>
+async function ObsidianContents(path?: string ): Promise<GithubContentInterface[]>
 {
-	const url = `${GITHUB_API_URL}/repos/${GITHUB_OBSIDIAN_CONFIG.owner}/${GITHUB_OBSIDIAN_CONFIG.repo}/contents/${path ? path : ''}`;
-	const res = await fetch(url,{
-		headers: {
-			'Authorization': `Bearer ${GITHUB_OBSIDIAN_CONFIG.token}`,
-			'Accept': 'application/vnd.github.html+json',
-			'X-GitHub-Api-Version': GITHUB_OBSIDIAN_CONFIG.version
+	try{
+		const url = `${GITHUB_API_URL}/repos/${GITHUB_OBSIDIAN_CONFIG.owner}/${GITHUB_OBSIDIAN_CONFIG.repo}/contents/${path ? path : ''}`;
+		const result = await GithubContents(url);
+		if(!_.isArray(result)){
+			throw new Error('GithubContentInterface[] -> GithubContentInterface');
 		}
-	})
 
-	if(res.status === constants.HTTP_STATUS_NOT_FOUND){
-		throw new NotFoundApiException(res.statusText);
+		return result;
+	}catch( error ){
+		throw error;
 	}
 
-	if(res.status !== 200){
-		throw new Error(res.statusText);
-	}
-
-
-	return res.json();
 }
 
 export async function ObsidianContentsByBlog(path?: string)
 {
-	const data = await ObsidianContents(`blog/${path ? path : ''}`);
+	const data = await ObsidianContents(`${BlogPath}/${path ? path : ''}`);
 
 	return data;
 }
@@ -37,7 +35,7 @@ export async function ObsidianContentsByBlog(path?: string)
 export async function ObsidianContentsByCalendar(path?: string)
 {
 	try{
-		const data = await ObsidianContents(`calendar/${path ? path : ''}`);
+		const data = await ObsidianContents(`${CalendarPath}/${path ? path : ''}`);
 		return data;
 	}catch(e){
 		if(e instanceof NotFoundApiException){
@@ -45,8 +43,30 @@ export async function ObsidianContentsByCalendar(path?: string)
 		}
 		throw e;
 	}
+}
 
+export async function ObsidianFileContentEncoding(content: GithubContentInterface){
 
+}
 
+export async function ObsidianFileContentsEncoding(contents: GithubContentInterface[]): Promise<GithubContentInterface[]>
+{
+	const result : GithubContentInterface[] = [];
+	// contents.forEach(async (content) => {
+	for(const content of contents){
+		if(content.type === _BLOG_CONTENT_TYPE.FILE){
+			const fileContent = await GithubContentString(content.download_url);
+			if(!_.isEmpty(fileContent)){
+				content.content = fileContent;
+			}
+			
+		
+		}
+		result.push(content);
+		
+	}
 
+	// })
+
+	return result;
 }

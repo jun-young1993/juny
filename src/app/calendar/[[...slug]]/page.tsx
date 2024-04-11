@@ -28,16 +28,18 @@ export default async function Page({ params }: MultiSegmentPageParams){
 		redirect(`/${MenuType.CALENDAR}/${new Date().getFullYear()}/${fillWord((new Date().getMonth()+1).toString(), 2, '0')}`);
 	}
 
-	const path = params.slug
-		? _.join(params.slug,'/')
-		: undefined;
+	if(params.slug.length < 2){
+		throw new Error('not found ');
+	}
+
+	const [year, month, day] = params.slug;
 	const data:CalendarInterface[]| [] = await getData(
-		path
+		`${year}/${month}`
 	);
 
 
-	const [year, month] = params.slug;
-	const result: {[key: string]: CalendarInterface[] | []} = {};
+	
+	const result: {[key: string]: CalendarInterface[]} = {};
 
 	for(const calendarForDay of data){
 		const day = calendarForDay.name;
@@ -55,8 +57,8 @@ export default async function Page({ params }: MultiSegmentPageParams){
 		>
 			<Calendar
 				data={result}
-				year={year}
-				month={month}
+				year={parseInt(year)}
+				month={parseInt(month)}
 			/>
 		</ContainerLayout>
 	)

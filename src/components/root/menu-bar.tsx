@@ -23,7 +23,7 @@ function MenuIcon(props: MenuIconProps){
 				pushDraggyModal(props.menu);
 			}}
 		>
-			<div className="tooltip transition delay-150 hover:-translate-y-3" data-tip={props.menu}>
+			<div className="tooltip transition delay-350 hover:-translate-y-3" data-tip={props.menu}>
 				<Image
 					className='ml-3 hover:scale-110 hover:cursor-pointer duration-300 dark:bg-dlate-100'
 					src={props.src}

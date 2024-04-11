@@ -65,7 +65,9 @@ export async function GET(request: Request, { params }: Params)
             path: item.path,
             type: item.type,
             content: content,
-            download_url: item.download_url
+            download_url: item.download_url,
+            html_url: "",
+            git_url: ""
         };
 
         formattedData.push(formattedItem);
