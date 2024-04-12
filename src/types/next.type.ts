@@ -5,8 +5,12 @@ export interface NextPageCatchAllSegmentProps
 }
 
 export interface MultiSegmentPageParams {
+
+}
+
+export interface MutiSegmentSlugPageParams extends MultiSegmentPageParams{
     params: {
-        slug?: [] | string[] | undefined
+        slug: string[] | []
     }
 }
 

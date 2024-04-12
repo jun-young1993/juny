@@ -8,8 +8,16 @@ import {API_URL} from "@/lib/config/config";
 import {CalendarPath} from "@/defined/calendar.defined";
 import _ from "lodash";
 import {CalendarInterface} from "@/types/calendar.type";
+export interface YearMonthInterface {
+	
+	year: string
+	month: string
 
-async function getData(path?: string): Promise<CalendarInterface[] | []> {
+}
+export interface MultiSegmentPageCalendarYearMonthParams extends MultiSegmentPageParams {
+	params: YearMonthInterface
+}
+export async function getCalendarData(path?: string): Promise<CalendarInterface[] | []> {
 	const dynamicPath = path ? path : '';
 
 	const res = await fetch(API_URL(`${CalendarPath}/${dynamicPath}`),{
@@ -22,18 +30,10 @@ async function getData(path?: string): Promise<CalendarInterface[] | []> {
 	return result;
 }
 
-export default async function Page({ params }: MultiSegmentPageParams){
+export default async function Page({ params }: MultiSegmentPageCalendarYearMonthParams){
 
-	if(params.slug === undefined){
-		redirect(`/${MenuType.CALENDAR}/${new Date().getFullYear()}/${fillWord((new Date().getMonth()+1).toString(), 2, '0')}`);
-	}
-
-	if(params.slug.length < 2){
-		throw new Error('not found ');
-	}
-
-	const [year, month, day] = params.slug;
-	const data:CalendarInterface[]| [] = await getData(
+	const {year, month } = params;
+	const data:CalendarInterface[]| [] = await getCalendarData(
 		`${year}/${month}`
 	);
 

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ReactNode, useState } from "react";
 import { FileIcon, FolderIcon } from "../icons/svg.icon";
 import _ from "lodash";
+import { Viewlayout } from "../layouts/view.layouts";
 
 interface BlogContentModalInterface {
 	link?: (content: BlogContentInterface,index: number) => ReactNode
@@ -58,7 +59,24 @@ export default function BlogContent(props: BlogContentProps){
 		)
 	}
 
-
+	return (
+		<Viewlayout>
+							{(
+				!_.isEmpty(props.data) && 
+				typeof props.data[props?.modal?.selectedIndex ?? selectedIndex]?.content === "string"
+				) &&
+					<div className="w-full h-full">
+						<div className="w-full flex justify-center h-1/12">
+							<div className="text-xl font-bold italic">{props.data[props?.modal?.selectedIndex ?? selectedIndex].name}</div>
+						</div>
+						<div className="w-full h-11/12 flex justify-center">
+							<article className="prose dark:text-gray-200" dangerouslySetInnerHTML={{__html: props.data[props?.modal?.selectedIndex ?? selectedIndex].content as string}} />
+						</div>
+					</div>
+					
+				}
+		</Viewlayout>
+	)
 	return (
 		<div className="flex h-[90%]">
 			<div className={"flex-none w-1/4 h-full"}>

@@ -5,7 +5,7 @@ import { MenuType } from '@/types/menu.type';
 import {API_URL} from "@/lib/config/config";
 import _ from "lodash"
 import { BlogPath } from '@/defined/blog.defined';
-import { MultiSegmentPageParams } from '@/types/next.type';
+import {  MutiSegmentSlugPageParams } from '@/types/next.type';
 
 async function getData(path?: string): Promise<BlogContentInterface[]> {
     const dynamicPath = path ? path : '';
@@ -20,7 +20,7 @@ async function getData(path?: string): Promise<BlogContentInterface[]> {
   return result;
 }
 
-export default async function Page({ params }:MultiSegmentPageParams){
+export default async function Page({ params }:MutiSegmentSlugPageParams){
     const path = params.slug
         ? _.join(params.slug,'/')
         : undefined;
