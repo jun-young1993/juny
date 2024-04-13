@@ -45,10 +45,6 @@ export async function ObsidianContentsByCalendar(path?: string)
 	}
 }
 
-export async function ObsidianFileContentEncoding(content: GithubContentInterface){
-
-}
-
 export async function ObsidianFileContentsEncoding(contents: GithubContentInterface[]): Promise<GithubContentInterface[]>
 {
 	const result : GithubContentInterface[] = [];
@@ -65,8 +61,6 @@ export async function ObsidianFileContentsEncoding(contents: GithubContentInterf
 		result.push(content);
 		
 	}
-
-	// })
 
 	return result;
 }

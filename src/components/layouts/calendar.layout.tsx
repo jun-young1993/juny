@@ -7,9 +7,9 @@ import {LeftArrow} from "@/icons/svg";
 import {useRouter} from "next/navigation";
 interface CalendarLayoutProps {
     data: CalendarInterface[] | []
-    children?: ReactNode
+    content?: string
 }
-export function CalendarLayout({data, children}: CalendarLayoutProps){
+export function CalendarLayout({data, content}: CalendarLayoutProps){
 
     const publicDataPathArray:[string] = data[0].path.split('/');
     publicDataPathArray.pop();
@@ -38,7 +38,7 @@ export function CalendarLayout({data, children}: CalendarLayoutProps){
             </div>
             <div className={"flex-1 w-full h-full pl-10 dark:text-gray-200 overflow-y-scroll"}>
                 <Markdown>
-                    {children}
+                    {content}
                 </Markdown>
             </div>
         </div>

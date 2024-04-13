@@ -2,12 +2,11 @@ import Calendar from "@/components/calendar/calendar";
 import ContainerLayout from "@/components/layouts/container.layouts"
 import { MenuType } from "@/types/menu.type"
 import { MultiSegmentPageParams } from "@/types/next.type"
-import {redirect} from "next/navigation";
-import {fillWord, getPreviousMonthLastSunday, removeFirstSegment} from "juny-tsutil";
 import {API_URL} from "@/lib/config/config";
 import {CalendarPath} from "@/defined/calendar.defined";
-import _ from "lodash";
 import {CalendarInterface} from "@/types/calendar.type";
+import {getCalendarData} from "@/lib/client/calendar.client";
+import {fillWord} from "juny-tsutil";
 export interface YearMonthInterface {
 	
 	year: string
@@ -17,38 +16,36 @@ export interface YearMonthInterface {
 export interface MultiSegmentPageCalendarYearMonthParams extends MultiSegmentPageParams {
 	params: YearMonthInterface
 }
-export async function getCalendarData(path?: string): Promise<CalendarInterface[] | []> {
+export async function getData(path: string, year:number, month: number): Promise<{[key: string]: CalendarInterface[]}> {
 	const dynamicPath = path ? path : '';
 
-	const res = await fetch(API_URL(`${CalendarPath}/${dynamicPath}`),{
-		method: 'GET',
-		next: { tags: dynamicPath.split('/') }
-	});
+	const data = await getCalendarData(path);
+	const result: {[key: string]: CalendarInterface[]} = {};
 
-	const result = await res.json();
+	for(const calendarForDay of data){
+		const day = calendarForDay.name;
+		const dataPath: string = `${year}/${fillWord(month.toString(),2,"0")}/${fillWord(day.toString(),2,"0")}`;
 
+		const calendarForDayData = await getCalendarData(dataPath);
+
+
+		result[day] = calendarForDayData;
+	}
 	return result;
 }
 
 export default async function Page({ params }: MultiSegmentPageCalendarYearMonthParams){
 
 	const {year, month } = params;
-	const data:CalendarInterface[]| [] = await getCalendarData(
-		`${year}/${month}`
+	const result:{[key: string]: CalendarInterface[]} = await getData(
+		`${year}/${month}`,
+		parseInt(fillWord(year,2,"0")),
+		parseInt(fillWord(month,2,"0"))
 	);
 
 
 	
-	const result: {[key: string]: CalendarInterface[]} = {};
 
-	for(const calendarForDay of data){
-		const day = calendarForDay.name;
-		const dataPath: string = `${year}/${month}/${day}`;
-		const calendarForDayData = await getCalendarData(dataPath);
-
-
-		result[day] = calendarForDayData;
-	}
 
 	return (
 		<ContainerLayout
