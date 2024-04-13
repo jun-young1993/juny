@@ -3,19 +3,36 @@ import { YearMonthInterface, getCalendarData } from "../page"
 import { API_URL } from "@/lib/config/config";
 import { CalendarInterface } from "@/types/calendar.type";
 import { CalendarPath } from "@/defined/calendar.defined";
+import {MenuType} from "@/types/menu.type";
+import ContainerLayout from "@/components/layouts/container.layouts";
+import Link from "next/link";
+import {FileIcon} from "@/components/icons/svg.icon";
+import {CalendarLayout} from "@/components/layouts/calendar.layout";
 
-export interface YearMonthDayInterface extends YearMonthInterface{
+export interface YearMonthDaySlugInterface extends YearMonthInterface{
 	day: string
 }
 export interface MultiSegmentPageCalendarYearMonthDayParams extends MultiSegmentPageParams {
-	params: YearMonthDayInterface
+	params: YearMonthDaySlugInterface
 }
+
+
 
 export default async function Page({ params }: MultiSegmentPageCalendarYearMonthDayParams){
 	const { year, month, day} = params;
 	const data:CalendarInterface[]| [] = await getCalendarData(
 		`${year}/${month}/${day}`
 	);
-	console.log(data);
-	return <div>{day}</div>
+
+	return (
+		<ContainerLayout
+			type={MenuType.CALENDAR}
+			title={MenuType.CALENDAR}
+		>
+			<CalendarLayout
+
+				data={data}
+			/>
+		</ContainerLayout>
+	)
 }

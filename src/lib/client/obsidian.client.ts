@@ -15,7 +15,7 @@ async function ObsidianContents(path?: string ): Promise<GithubContentInterface[
 		const url = `${GITHUB_API_URL}/repos/${GITHUB_OBSIDIAN_CONFIG.owner}/${GITHUB_OBSIDIAN_CONFIG.repo}/contents/${path ? path : ''}`;
 		const result = await GithubContents(url);
 		if(!_.isArray(result)){
-			throw new Error('GithubContentInterface[] -> GithubContentInterface');
+			return [result];
 		}
 
 		return result;
