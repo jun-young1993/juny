@@ -14,19 +14,22 @@ export interface MultiSegmentPageCalendarYearMonthDayFilenameParams extends Mult
     params: YearMonthDaySlugInterface
 }
 
-export async function getData(path: string): Promise<CalendarInterface[]>{
-    return await getCalendarData(path);
+export async function getData(path: string, contentPath: string): Promise<[CalendarInterface[]]>{
+
+    const data:CalendarInterface[]| [] = await getCalendarData(
+        path
+    ) as CalendarInterface[];
+
+    const content:CalendarInterface[] = await getCalendarData(
+        contentPath
+    ) as CalendarInterface[];
+    return Promise.resolve([data, content]);
 }
 
 export default async function Page({params}: MultiSegmentPageCalendarYearMonthDayFilenameParams) {
     const { year, month, day, filename } = params;
-    const data:CalendarInterface[]| [] = await getData(
-        `${year}/${month}/${day}`
-    );
+    const [data, content] = await getData(`${year}/${month}/${day}`,`${year}/${month}/${day}/${filename}`);
 
-    const content:CalendarInterface[] = await getData(
-        `${year}/${month}/${day}/${filename}`
-    );
 
     return (
         <ContainerLayout
