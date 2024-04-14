@@ -1,10 +1,8 @@
 import {CalendarInterface} from "@/types/calendar.type";
 import {FileIcon} from "@/components/icons/svg.icon";
 import Link from "next/link";
-import {ReactNode} from "react";
-import Markdown from "react-markdown";
 import {LeftArrow} from "@/icons/svg";
-import {useRouter} from "next/navigation";
+import MarkDownPreview from "@/components/markdown/mark-down";
 interface CalendarLayoutProps {
     data: CalendarInterface[] | []
     content?: string
@@ -37,9 +35,7 @@ export function CalendarLayout({data, content}: CalendarLayoutProps){
                 </ul>
             </div>
             <div className={"flex-1 w-full h-full pl-10 dark:text-gray-200 overflow-y-scroll"}>
-                <Markdown>
-                    {content}
-                </Markdown>
+                <MarkDownPreview source={content} />
             </div>
         </div>
     )

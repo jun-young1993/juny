@@ -7,9 +7,6 @@ import ContainerLayout from "@/components/layouts/container.layouts";
 import {CalendarLayout} from "@/components/layouts/calendar.layout";
 import {getCalendarData} from "@/lib/client/calendar.client";
 
-export interface YearMonthDayFileNameSlugInterface extends YearMonthDaySlugInterface {
-    filename: string
-}
 export interface MultiSegmentPageCalendarYearMonthDayFilenameParams extends MultiSegmentPageParams{
     params: YearMonthDaySlugInterface
 }

@@ -1,13 +1,14 @@
-import MarkdownPreview, { MarkdownPreviewProps, MarkdownPreviewRef } from '@uiw/react-markdown-preview';
-export function MarkDown(props: MarkdownPreviewProps & React.RefAttributes<MarkdownPreviewRef>){
+'use client'
+import MarkdownPreview from "@uiw/react-markdown-preview";
+
+interface MarkDownProps {
+	source: string
+}
+export default function MarkDownPreview(props: MarkDownProps){
 	return (
 		<MarkdownPreview
 			{...props}
 			style={{ padding: 16 }}
-			rehypeRewrite={(node, index, parent) => {
-
-				console.log("=>(mark-down.tsx:8) node, index,parent", node, index,parent);
-			}}
 		/>
 	)
 }

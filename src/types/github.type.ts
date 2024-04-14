@@ -4,13 +4,18 @@ export interface GithubContentInterface {
 	name: string
 	path: string
 	type: _BLOG_CONTENT_TYPE
-	content?: null | string
+	content?: string
 	download_url: string
 	html_url: string
 	git_url: string
 	encoding?: BufferEncoding
 }
 
-export interface GithubReadmeContent {
+export interface GithubReadmeContentInterfaceGithubReadmeContent {
 	content: string
+}
+
+export interface GithubReadmeContentInterface extends GithubContentInterface{
+	content: string
+	encoding: BufferEncoding
 }
