@@ -30,10 +30,6 @@ export async function GET(request: Request)
 		throw new Error('not found github readme.md');
 	}
 
-
-
-	data.content = Buffer.from(data.content, data.encoding).toString('utf8');
-
 	return NextResponse.json(data,{
 		status: constants.HTTP_STATUS_OK,
 	})
