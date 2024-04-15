@@ -5,7 +5,7 @@ import { MenuType } from '@/types/menu.type';
 import {API_URL} from "@/lib/config/config";
 import _ from "lodash"
 import { BlogPath } from '@/defined/blog.defined';
-import {  MutiSegmentSlugPageParams } from '@/types/next.type';
+import { MutiSegmentSlugPageParams } from '@/types/next.type';
 
 async function getData(path?: string): Promise<BlogContentInterface[]> {
     const dynamicPath = path ? path : '';

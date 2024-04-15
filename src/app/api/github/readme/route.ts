@@ -34,7 +34,6 @@ export async function GET(request: Request)
 
 	data.content = Buffer.from(data.content, data.encoding).toString('utf8');
 
-	console.log("=>(route.ts:40) data", data);
 	return NextResponse.json(data,{
 		status: constants.HTTP_STATUS_OK,
 	})

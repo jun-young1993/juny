@@ -7,3 +7,7 @@ export interface CalendarInterface extends GithubContentInterface{
     type: _BLOG_CONTENT_TYPE
 
 }
+
+export type DayByCalendarType = {
+    [key: string] : CalendarInterface[]
+}

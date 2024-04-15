@@ -9,7 +9,7 @@ interface CalendarLayoutProps {
 }
 export function CalendarLayout({data, content}: CalendarLayoutProps){
 
-    const publicDataPathArray:[string] = data[0].path.split('/');
+    const publicDataPathArray:string[] = data[0].path.split('/');
     publicDataPathArray.pop();
     publicDataPathArray.pop();
 
@@ -35,7 +35,7 @@ export function CalendarLayout({data, content}: CalendarLayoutProps){
                 </ul>
             </div>
             <div className={"flex-1 w-full h-full pl-10 dark:text-gray-200 overflow-y-scroll"}>
-                <MarkDownPreview source={content} />
+                <MarkDownPreview source={content ?? 'no data'} />
             </div>
         </div>
     )

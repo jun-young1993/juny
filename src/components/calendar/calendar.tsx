@@ -1,6 +1,6 @@
 import {getPreviousMonthLastSunday, getDaysInMonth, DayOfWeek, fillWord} from "juny-tsutil";
 import HeaderCalendar from "@/components/calendar/header.calendar";
-import {CalendarInterface} from "@/types/calendar.type";
+import {CalendarInterface, DayByCalendarInterface} from "@/types/calendar.type";
 import { CalendarPath } from "@/defined/calendar.defined";
 import Link from "next/link";
 
@@ -8,7 +8,7 @@ import Link from "next/link";
 interface CalendarProps {
 	year: number
 	month: number
-	data: {[key: string]: CalendarInterface[]}
+	data: DayByCalendarInterface
 }
 
 interface BaseDay {

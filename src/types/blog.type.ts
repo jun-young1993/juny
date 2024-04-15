@@ -5,6 +5,6 @@ export interface BlogContentInterface extends GithubContentInterface{
 	name: string
 	path: string
 	type: _BLOG_CONTENT_TYPE
-	content?: null | string
+	content?: string
 	download_url: string
 }

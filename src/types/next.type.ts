@@ -1,3 +1,5 @@
+
+
 export interface NextPageCatchAllSegmentProps
 {
     params: { slug: string[] }
@@ -8,6 +10,18 @@ export interface MultiSegmentPageParams {
 
 }
 
+export interface MultiSegmentApiParams {
+    
+}
+export interface YearMonthInterface {
+	
+	year: string
+	month: string
+
+}
+export interface YearMonthDaySlugInterface extends YearMonthInterface{
+	day: string
+}
 export interface MutiSegmentSlugPageParams extends MultiSegmentPageParams{
     params: {
         slug: string[] | []

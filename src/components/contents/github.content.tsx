@@ -1,9 +1,9 @@
 'use client';
 
-import { GithubReadmeContent } from "@/types/github.type";
+import { GithubReadmeContentInterfaceGithubReadmeContent } from "@/types/github.type";
 
 interface GithubContentInterface {
-	content: GithubReadmeContent['content']
+	content: GithubReadmeContentInterfaceGithubReadmeContent['content']
 }
 export default function GithubContent(props: GithubContentInterface){
 	return (

@@ -15,27 +15,12 @@ export async function GET(request: Request, { params }: Params)
 {
 
     const path = params.slug ? _.join(params.slug,'/') : '';
-    
-    // const url = `${GITHUB_API_URL}/repos/${GITHUB_OBSIDIAN_CONFIG.owner}/${GITHUB_OBSIDIAN_CONFIG.repo}/contents/blog/${path}`;
-    //
-    // const res = await fetch(url,{
-    //     headers: {
-    //         'Authorization': `Bearer ${GITHUB_OBSIDIAN_CONFIG.token}`,
-    //         'Accept': 'application/vnd.github+json',
-    //         'X-GitHub-Api-Version': GITHUB_OBSIDIAN_CONFIG.version
-    //     }
-    // })
-    //
-    // if(res.status !== constants.HTTP_STATUS_OK){
-    //     throw new Error(res.statusText);
-    // }
-    //
-    // const data: BlogContentInterface[] = await res.json();
+
     const data: BlogContentInterface[] = await ObsidianContentsByBlog(path);
 
     const formattedData: BlogContentInterface[] = [];
     for(const item of data){
-        let content: BlogContentInterface['content'] = null;
+        let content: BlogContentInterface['content'];
         if(item.type === 'file'){
 
             const contentRes = await fetch(item.download_url,{

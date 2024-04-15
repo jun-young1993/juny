@@ -1,6 +1,6 @@
 import ContainerLayout from "@/components/layouts/container.layouts";
 import { API_URL } from "@/lib/config/config";
-import {GithubReadmeContent, GithubReadmeContentInterface} from "@/types/github.type";
+import { GithubReadmeContentInterface } from "@/types/github.type";
 import { MenuType } from "@/types/menu.type";
 import MarkDownPreview from "@/components/markdown/mark-down";
 
@@ -21,11 +21,10 @@ export default async function Page(){
 
   return (
       <ContainerLayout
-        children={
-		      <MarkDownPreview source={data.content} />
-        }
         type={MenuType.GITHUB}
         title={MenuType.GITHUB}
-      />
+      >
+	<MarkDownPreview source={data.content} />
+      </ContainerLayout>
   )
 }
