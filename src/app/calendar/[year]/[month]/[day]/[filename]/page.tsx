@@ -13,35 +13,34 @@ export interface MultiSegmentPageCalendarYearMonthDayFilenameParams extends Mult
     params: YearMonthDayFilenameSlugInterface
 }
 
-// export async function getData(path: string): Promise<CalendarInterface[]>{
+export async function getData(path: string){
 
-//     const data= await getCalendarData(
-//         path
-//     );
-//     if(data.length === 0){
-//         throw new Error('not found data');
-//     }
-//     console.log('data',data);
-//     return data;
-// }
+    const data= await getCalendarData<CalendarInterface[]>(
+        path
+    );
+    if(data.length === 0){
+        throw new Error('not found data');
+    }
+    
+    return data;
+}
 
 export default async function Page({params}: MultiSegmentPageCalendarYearMonthDayFilenameParams) {
-    // const { year, month, day, filename } = params;
-    // const data:CalendarInterface[] = await getData(`${year}/${month}/${day}`);
-    // const content:CalendarInterface[] = await getData(`${year}/${month}/${day}/${filename}`);
+    const { year, month, day, filename } = params;
+    const data:CalendarInterface[] = await getData(`${year}/${month}/${day}`);
+    const content:CalendarInterface[] = await getData(`${year}/${month}/${day}/${filename}`);
     
 
 
     return (
-        <div>hi</div>
-        // <ContainerLayout
-        //     type={MenuType.CALENDAR}
-        //     title={MenuType.CALENDAR}
-        // >
-        //     <CalendarLayout
-        //         data={data}
-        //         content={content[0].content ?? ''}
-        //     />
-        // </ContainerLayout>
+        <ContainerLayout
+            type={MenuType.CALENDAR}
+            title={MenuType.CALENDAR}
+        >
+            <CalendarLayout
+                data={data}
+                content={content[0].content ?? ''}
+            />
+        </ContainerLayout>
     )
 }
