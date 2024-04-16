@@ -9,6 +9,12 @@ const config: Config = {
     './src/providers/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
+    screens:{
+      'mini': '310px',
+      'small': '640px',
+      'medium': '900px',
+      'large': '1240px'
+    },
     extend: {
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

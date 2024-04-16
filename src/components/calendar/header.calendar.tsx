@@ -51,7 +51,6 @@ export default function HeaderCalendar({
         if (/^\d$/.test(keyPressed)) {
 
         }
-        console.log("=>(header.calendar.tsx:49) keyPressed", keyPressed);
         if(keyPressed === 'Backspace'){
             setYearState(parseInt(yearState.toString().slice(1,-1)));
         }
@@ -70,13 +69,10 @@ export default function HeaderCalendar({
                          className={`hover:border hover:border-indigo-300`}
                          autoFocus={true}
                          onFocus={() => {
-                             console.log("=>(header.calendar.tsx:65) focus");
+                             
                          }}
                          onClick={(event) => {
-                             yearRef?.current?.focus();
-                             console.log("=>(header.calendar.tsx:68) click");
-
-                             // setClicked(DATE_UNIT.YEAR)
+                             yearRef?.current?.focus();                             
                          }}
                          onKeyUp={(e) => handleKeyUp(e)}
                     >

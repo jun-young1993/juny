@@ -26,7 +26,6 @@ export function BlogModal(){
 	
 
 	const onClickMenu = (content: BlogContentInterface, index: number) => {
-		console.log('onClickMenu',content);
 		const path = content.path;
 		const type = content.type;
 		if(type == _BLOG_CONTENT_TYPE.DIR){
@@ -60,8 +59,7 @@ export function BlogModal(){
 					link: makeLink,
 					selectedIndex: selectedIndex,
 					onNavigationClick: (path, index) => {
-						setUrl(`/api/${path}`);
-						console.log(path.split('/').splice(1).join('/'));
+						setUrl(`/api/${path}`);		
 						setPath(path.split('/').splice(2).join('/'));
 					}
 

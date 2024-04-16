@@ -58,9 +58,12 @@ export default function BlogContent(props: BlogContentProps){
 		)
 	}
 
+	const isContent:boolean = (!_.isEmpty(props.data) && 
+				typeof props.data[props?.modal?.selectedIndex ?? selectedIndex]?.content === "string");
+
 	return (
 		<div className="flex h-[90%]">
-			<div className={"flex-none w-1/4 h-full"}>
+			<div className={`flex-none w-1/4 mini:w-full h-full ${isContent ? 'mini:hidden' : 'mini:block'}`}>
 				<ul className="menu bg-base-200 w-56 rounded-box dark:bg-gray-600 dark:text-gray-200 w-full">
 					<li className="w-full">
 						<h2 className="menu-title dark:text-gray-200 text-lg">
@@ -105,10 +108,9 @@ export default function BlogContent(props: BlogContentProps){
 					</li>
 				</ul>
 			</div>
-			<div className={"flex-1 w-full h-full pl-10 dark:text-gray-200 overflow-y-scroll"}>
+			<div className={`flex-1 w-full h-full pl-10 dark:text-gray-200 overflow-y-scroll ${isContent ? 'mini:block' : 'mini:hidden'}`}>
 				{(
-				!_.isEmpty(props.data) && 
-				typeof props.data[props?.modal?.selectedIndex ?? selectedIndex]?.content === "string"
+				isContent
 				) &&
 					<div className="w-full h-full">
 						<div className="w-full flex justify-center h-1/12">

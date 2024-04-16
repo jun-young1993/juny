@@ -37,11 +37,6 @@ export default function Calendar({
 	const previousMonthLastSunday = getPreviousMonthLastSunday(year, month);
 	const daysInMonth = getDaysInMonth(year, month);
 
-		// const handleDayClick = (data: CalendarInterface[]) => {
-		// 	console.log(data);
-		// }
-									console.log(data);
-
 	return (
 		<div className={"w-full h-full"}>
 			<HeaderCalendar year={year} month={month} />

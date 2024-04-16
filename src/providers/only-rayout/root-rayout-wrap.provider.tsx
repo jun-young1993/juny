@@ -3,10 +3,8 @@
 import { ReactNode, useEffect } from 'react'
 import { ThemeType, useTheme } from '@/store/recoil/theme-mode.recoil'
 import NavBar from '@/components/root/navbar'
-import DraggyModal from '@/components/modal/draggy.modal'
 import MenuBar from '@/components/root/menu-bar'
-import {GithubModal} from "@/components/modal/github.modal";
-import {BlogModal} from "@/components/modal/blog.modal";
+import { usePathname } from 'next/navigation'
 
 export default function RootLayoutWrapProvider({
   children,
@@ -14,9 +12,10 @@ export default function RootLayoutWrapProvider({
   children: ReactNode
 }) {
   const { theme, setTheme } = useTheme();
-
+  
   let isSystemDark = false;
-
+  const pathname = usePathname();
+  const isRoot: boolean = pathname === '/';
   useEffect(() => {
 
     if(typeof window !== undefined){
@@ -34,9 +33,9 @@ export default function RootLayoutWrapProvider({
   }, [theme])
 
   return (
-    <div className='flex flex-col'>
-    <header className='flex-none items-center justify-center'>
-      <div className="container mx-auto">
+    <div className='flex flex-col h-full'>
+    <header className={`flex-none items-center justify-center ${isRoot ? '' : 'mini:hidden medium:block'}`}>
+      <div className="w-full">
         <NavBar />
       </div>
     </header>
@@ -45,11 +44,11 @@ export default function RootLayoutWrapProvider({
       flexGrow: 1,
       height: '80%'
     }}>
-      <div className='container mx-auto py-8'>
+      <div className='w-full h-full py-2 mini:py-1'>
         {children}
       </div>
     </main>
-    <footer className='flex-none items-center justify-center h-[15%]'>
+    <footer className={`flex-none items-center justify-center h-[15%] ${isRoot ? '' : 'mini:hidden medium:block'}`}>
       {/*<div className="container mx-auto opacity-0 h-full">*/}
         <MenuBar />
       {/*</div>*/}
