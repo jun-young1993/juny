@@ -1,4 +1,4 @@
-import {ObsidianContentsByBlog} from "@/lib/client/obsidian.client";
+import {ObsidianContentsByBlog, ObsidianFileContentsEncoding} from "@/lib/client/obsidian.client";
 import {BlogContentInterface} from "@/types/blog.type";
 import {NextResponse} from "next/server";
 import {GITHUB_API_URL, GITHUB_OBSIDIAN_CONFIG} from "@/lib/config/config";
@@ -16,49 +16,13 @@ export async function GET(request: Request, { params }: Params)
 
     const path = params.slug ? _.join(params.slug,'/') : '';
 
-    const data: BlogContentInterface[] = await ObsidianContentsByBlog(path);
+    let data: BlogContentInterface[] = await ObsidianContentsByBlog(path);
 
-    const formattedData: BlogContentInterface[] = [];
-    for(const item of data){
-        let content: BlogContentInterface['content'];
-        if(item.type === 'file'){
+    if(path.endsWith(".md")){
+        data = await ObsidianFileContentsEncoding(data);
+    };
 
-            const contentRes = await fetch(item.download_url,{
-                headers: {
-                    'Authorization': `Bearer ${GITHUB_OBSIDIAN_CONFIG.token}`,
-                    'Accept': 'application/vnd.github+json',
-                    'X-GitHub-Api-Version': GITHUB_OBSIDIAN_CONFIG.version
-                }
-            });
-            content = await contentRes.text();
-            const markdownRes = await fetch(`${GITHUB_API_URL}/markdown`,{
-                method: 'POST',
-                headers: {
-                    'Authorization': `Bearer ${GITHUB_OBSIDIAN_CONFIG.token}`,
-                    'Accept': 'application/vnd.github+json',
-                    'X-GitHub-Api-Version': GITHUB_OBSIDIAN_CONFIG.version
-                },
-                body: JSON.stringify({
-                    text: content
-                })
-            });
-            content = await markdownRes.text();
-        }
-
-        const formattedItem: BlogContentInterface = {
-            name: item.name,
-            path: item.path,
-            type: item.type,
-            content: content,
-            download_url: item.download_url,
-            html_url: "",
-            git_url: ""
-        };
-
-        formattedData.push(formattedItem);
-    }
-
-    return NextResponse.json(formattedData,{
+    return NextResponse.json(data,{
         status: constants.HTTP_STATUS_OK,
     });
 }
