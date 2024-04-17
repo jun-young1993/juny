@@ -9,7 +9,7 @@ import { BlogContentMenuNav } from "../blog/blog-content-menu-nav";
 
 export default function BlogContent(props: BlogContentProps){
 
-	const [selectedIndex, setSelectedIndex] = useState<number>(0);
+	const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 	
 
 	const handleClickMenuItem = (content: BlogContentInterface, index: number) => {
@@ -41,6 +41,7 @@ export default function BlogContent(props: BlogContentProps){
 	}
 
 	const isContent:boolean = (!_.isEmpty(props.data) && 
+				(selectedIndex !== null) &&
 				typeof props.data[props?.modal?.selectedIndex ?? selectedIndex]?.content === "string");
 
 	return (
@@ -72,7 +73,6 @@ export default function BlogContent(props: BlogContentProps){
 				) &&
 					<div className="w-full h-full">
 						<div className="w-full flex justify-center h-1/12">
-							<BlogContent {...props} />
 							<div className="text-xl font-bold italic">{props.data[props?.modal?.selectedIndex ?? selectedIndex].name}</div>
 						</div>
 						<div className="w-full h-11/12 flex justify-center">

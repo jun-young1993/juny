@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react'
+import { ReactNode, useState } from 'react'
 
 // 종료 버튼 아이콘 컴포넌트
 function CloseButtonIcon() {
@@ -97,7 +97,7 @@ interface HeaderGroupButton{
   onMinimize?: () => void
   onMaximize?: () => void
   maximized?: boolean
-  title?: string
+  title?: string | ReactNode
   className?: string
 }
 

@@ -9,7 +9,7 @@ import { useDraggyModal } from "@/store/recoil/draggy-modal.recoil";
 
 interface ContainerLayoutInterface {
 	children: ReactNode
-	title?: string
+	title?: string | ReactNode
 	type?: UnionsMenuType
 }
 export default function ContainerLayout(props: ContainerLayoutInterface){
@@ -30,7 +30,7 @@ export default function ContainerLayout(props: ContainerLayoutInterface){
 					}}
 				/>
 			</div>
-			<div className='w-full h-[90%] mini:h-[90%] p-3 overflow-y-scroll dark:text-slate-100'>
+			<div className='w-full h-[90%] mini:h-[90%] p-3 dark:text-slate-100'>
 				{props.children}
 			</div>
 	      </div>

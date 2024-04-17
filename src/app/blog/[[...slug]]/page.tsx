@@ -6,6 +6,8 @@ import {API_URL} from "@/lib/config/config";
 import _ from "lodash"
 import { BlogPath } from '@/defined/blog.defined';
 import { MutiSegmentSlugPageParams } from '@/types/next.type';
+import { BlogContentMenuNav } from '@/components/blog/blog-content-menu-nav';
+import { removeLastSegment } from 'juny-tsutil';
 
 async function getData(path?: string): Promise<BlogContentInterface[]> {
     const dynamicPath = path ? path : '';
@@ -32,7 +34,15 @@ export default async function Page({ params }:MutiSegmentSlugPageParams){
   return (
       <ContainerLayout
         type={MenuType.BLOG}
-        title={MenuType.BLOG}
+        title={(
+          <>
+          <span className='mini:hidden'>{MenuType.BLOG}</span>
+          <BlogContentMenuNav 
+              data={data}
+              path={path ?? ''}
+           />
+          </>
+        )}
       >
         <BlogContent
               data={data}
