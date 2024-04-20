@@ -13,6 +13,7 @@ async function ObsidianContents(path?: string ): Promise<GithubContentInterface[
 {
 	try{
 		const url = `${GITHUB_API_URL}/repos/${GITHUB_OBSIDIAN_CONFIG.owner}/${GITHUB_OBSIDIAN_CONFIG.repo}/contents/${path ? path : ''}`;
+
 		const result = await GithubContents(url);
 		if(!_.isArray(result)){
 			return [result];
@@ -36,6 +37,20 @@ export async function ObsidianContentsByCalendar(path?: string)
 {
 	try{
 		const data = await ObsidianContents(`${CalendarPath}/${path ? path : ''}`);
+		return data;
+	}catch(e){
+		if(e instanceof NotFoundApiException){
+			return [];
+		}
+		throw e;
+	}
+}
+
+export async function ObsidianContentsByImage(path?: string)
+{
+	try{
+		const data = await ObsidianContents(`/images/${path ? path : ''}`);
+
 		return data;
 	}catch(e){
 		if(e instanceof NotFoundApiException){

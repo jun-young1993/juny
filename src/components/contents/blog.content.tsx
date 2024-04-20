@@ -1,23 +1,11 @@
-'use client';
-import { BlogPath, _BLOG_CONTENT_TYPE } from "@/defined/blog.defined";
 import { BlogContentInterface, BlogContentProps } from "@/types/blog.type"
 import Link from "next/link";
-import { ReactNode, useState } from "react";
-import { FileIcon, FolderIcon } from "../icons/svg.icon";
+import { FolderIcon } from "../icons/svg.icon";
 import _ from "lodash";
 import { BlogContentMenuNav } from "../blog/blog-content-menu-nav";
 import MarkDownPreview from "../markdown/mark-down";
 
 export default function BlogContent(props: BlogContentProps){
-
-	const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
-	
-
-	const handleClickMenuItem = (content: BlogContentInterface, index: number) => {
-		if(content.type === _BLOG_CONTENT_TYPE.FILE){
-			// setSelectedIndex(index);
-		}
-	}
 
 	const makeLink = (content: BlogContentInterface,index: number) => {
 		if(props?.modal?.link){
@@ -45,12 +33,12 @@ export default function BlogContent(props: BlogContentProps){
 	const isContent:boolean = (!_.isEmpty(props.data) &&
 					!_.isEmpty(props.data[0]) &&
 					!_.isEmpty(props.data[0].content) &&
+					props.data.length === 1 &&
+					props.data[0].path.endsWith(".md") &&
 					typeof props.data[0].content === 'string'
-				// (selectedIndex !== null) 
-				// &&
-				// typeof props.data[props?.modal?.selectedIndex ?? selectedIndex]?.content === "string"
 			);
-	
+
+
 	return (
 		<div className="flex h-[90%]">
 			<div className={`flex-none mini:w-full medium:w-1/4 h-full ${isContent ? 'mini:hidden medium:block' : 'mini:block'}`}>
