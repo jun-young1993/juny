@@ -6,8 +6,9 @@ import MarkDownPreview from "@/components/markdown/mark-down";
 import Link from "next/link";
 
 async function getData(): Promise<GithubReadmeContentInterface>{
-	const res = await fetch(API_URL('/github/readme'),{
+	const res = await fetch(API_URL('/github/readme'), {
 		method: 'GET',
+		next: { revalidate: 3600 }
 	})
 
 	const result = await res.json();
