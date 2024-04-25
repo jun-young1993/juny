@@ -5,6 +5,7 @@ import {GITHUB_API_URL, GITHUB_OBSIDIAN_CONFIG} from "@/lib/config/config";
 import {constants} from "http2";
 import _ from "lodash";
 
+export const dynamic = 'force-dynamic'
 
 type Params = {
     params: {
