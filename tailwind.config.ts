@@ -10,9 +10,9 @@ const config: Config = {
   ],
   theme: {
     screens:{
-      'mini': '310px',
-      'small': '640px',
-      'medium': '900px',
+      'mini': '100px',
+      'small': '600px',
+      'medium': '970px',
       'large': '1240px'
     },
     extend: {

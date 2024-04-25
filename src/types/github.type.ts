@@ -19,3 +19,8 @@ export interface GithubReadmeContentInterface extends GithubContentInterface{
 	content: string
 	encoding: BufferEncoding
 }
+
+export interface GithubImageContentInterface extends GithubContentInterface {
+	content: string
+	encoding: BufferEncoding
+}

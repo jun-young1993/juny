@@ -38,7 +38,7 @@ export function BlogContentMenuNav(props: BlogContentProps){
 								}
 							}} className={navClassName+"hover:cursor-pointer"} key={`${BlogPath} / ${path}`}><span className="hover:cursor-pointer">/{currentPath}</span></span>
 						}
-						return <Link className={navClassName} key={`${BlogPath} / ${path}`} href={userPath}>/{currentPath}</Link>
+						return <Link className={navClassName} key={`${BlogPath} / ${path}`} href={userPath}>/{decodeURIComponent(currentPath)}</Link>
 					})}	
 				{/* </div> */}
 				

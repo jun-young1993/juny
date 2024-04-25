@@ -7,15 +7,14 @@ import _ from "lodash"
 import { BlogPath } from '@/defined/blog.defined';
 import { MutiSegmentSlugPageParams } from '@/types/next.type';
 import { BlogContentMenuNav } from '@/components/blog/blog-content-menu-nav';
-import { removeLastSegment } from 'juny-tsutil';
 
 async function getData(path?: string): Promise<BlogContentInterface[]> {
     const dynamicPath = path ? path : '';
   
-  const res = await fetch(API_URL(`${BlogPath}/${dynamicPath}`),{
+  const res = await fetch(API_URL(`${BlogPath}/${dynamicPath}`), {
       method: 'GET',
-       next: { tags: dynamicPath.split('/') }
-  });  
+      next: { revalidate: 3600 }
+  });
 
   const result = await res.json();
 

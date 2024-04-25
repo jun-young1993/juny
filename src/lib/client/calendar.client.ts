@@ -5,9 +5,9 @@ import {CalendarPath} from "@/defined/calendar.defined";
 export async function getCalendarData<T>(path?: string): Promise<T> {
     const dynamicPath = path ? path : '';
 
-    const res = await fetch(API_URL(`${CalendarPath}/${dynamicPath}`),{
+    const res = await fetch(API_URL(`${CalendarPath}/${dynamicPath}`), {
         method: 'GET',
-        next: { tags: dynamicPath.split('/') }
+        next: { revalidate: 3600 }
     });
 
     const result = await res.json();
