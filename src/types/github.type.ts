@@ -24,3 +24,8 @@ export interface GithubImageContentInterface extends GithubContentInterface {
 	content: string
 	encoding: BufferEncoding
 }
+
+export interface GithubUserInterface {
+	avatar_url: string
+
+}
