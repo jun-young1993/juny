@@ -1,5 +1,10 @@
-import { Button } from 'juny-react-style';
+
+import Profile from "@/components/common/profile";
+import ContainerLayout from "@/components/layouts/container.layouts";
+
 
 export default async function Page(){
-    return <Button text={'hi'} />
+    return (<ContainerLayout>
+        <Profile />
+    </ContainerLayout>);
 }
