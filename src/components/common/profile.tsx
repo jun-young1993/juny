@@ -10,7 +10,7 @@ export default function Profile()  {
             <AlignBox>
                 <GithubProfile
                     size={"100px"}
-                    gitPersonalAccessToken={process.env.NEXT_PUBLIC_GIT_HUB_TOKEN}
+                    gitPersonalAccessToken={process.env.NEXT_PUBLIC_GIT_HUB_TOKEN as string}
                 />
             </AlignBox>
             <AlignBox>
