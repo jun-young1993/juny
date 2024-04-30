@@ -14,7 +14,7 @@
   "dependencies": {
     "@uiw/react-markdown-preview": "^5.1.1",
     "juny-tsutil": "^1.0.5",
-    "juny-react-style": "^1.1.6",
+    "juny-react-style": "^1.1.7",
     "lodash": "^4.17.21",
     "moment": "^2.30.1",
     "next": "14.1.3",
