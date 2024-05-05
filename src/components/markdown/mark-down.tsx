@@ -31,6 +31,9 @@ export default function MarkDownPreview(props: MarkDownProps){
 							position : node.position
 						})
 					}
+					if(imageMatch){
+						console.log(node);
+					}
 				}
 
 			}}

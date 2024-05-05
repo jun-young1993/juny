@@ -1,7 +1,11 @@
 'use client';
 import { GithubProfile, LeftRightContainer, AlignBox } from "juny-react-style";
-
-export default function Profile()  {
+import MarkDownPreview from "@/components/markdown/mark-down";
+import {BlogContentInterface} from "@/types/blog.type";
+interface ProfileProps {
+    data: BlogContentInterface[0]
+}
+export default function Profile(props: ProfileProps)  {
 
     return(
         <LeftRightContainer
@@ -14,7 +18,7 @@ export default function Profile()  {
                 />
             </AlignBox>
             <AlignBox>
-                <div>hi</div>
+                <MarkDownPreview source={props.data[0].content} />
             </AlignBox>
         </LeftRightContainer>
     )

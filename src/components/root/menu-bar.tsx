@@ -47,6 +47,7 @@ export default function MenuBar(){
 					minHeight: `${borderMinHeight}px`
 				}}
 			>
+				<MenuIcon size={imageSize} src={_IMAGE.ME} menu={MenuType.ME} />
 				<MenuIcon size={imageSize} src={_IMAGE.GITHUB} menu={MenuType.GITHUB} />
 				<MenuIcon size={imageSize} src={_IMAGE.BLOG} menu={MenuType.BLOG} />
 				<MenuIcon size={imageSize} src={_IMAGE.CALENDAR} menu={MenuType.CALENDAR} />
