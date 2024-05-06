@@ -19,6 +19,7 @@ async function getData(): Promise<GithubReadmeContentInterface>{
 }
 
 export default async function Page(){
+
 	const data = await getData();
 
   return (

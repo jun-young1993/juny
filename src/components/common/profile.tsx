@@ -2,8 +2,10 @@
 import { GithubProfile, LeftRightContainer, AlignBox } from "juny-react-style";
 import MarkDownPreview from "@/components/markdown/mark-down";
 import {BlogContentInterface} from "@/types/blog.type";
+import {MarkdownPreviewProps} from "@uiw/react-markdown-preview";
 interface ProfileProps {
     data: BlogContentInterface[0]
+
 }
 export default function Profile(props: ProfileProps)  {
 
@@ -18,7 +20,7 @@ export default function Profile(props: ProfileProps)  {
                 />
             </AlignBox>
             <AlignBox>
-                <MarkDownPreview source={props.data[0].content} />
+                <MarkDownPreview source={props.data[0].content} aLinkPrefix={'/me/'}/>
             </AlignBox>
         </LeftRightContainer>
     )
