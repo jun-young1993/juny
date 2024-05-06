@@ -13,6 +13,6 @@ async function getData(){
 export default async function sitemap({id}: {id: number}) : Promise<MetadataRoute.Sitemap>{
 
     const data = await getData();
-    console.log("=>(page.tsx:16) data", data);
+
     return data;
 }

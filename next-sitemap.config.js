@@ -11,7 +11,7 @@ module.exports = {
     ], // page 등록 제외 페이지 주소
     robotsTxtOptions: {
         additionalSitemaps: [
-            `${url}/api/obsidian/repos/trees/sitemap`
+            `${url}/util/sitemap.xml`
         ],
         // 정책 설정
         policies: [

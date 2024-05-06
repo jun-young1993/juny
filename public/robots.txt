@@ -7,4 +7,5 @@ Disallow: /exclude
 Host: https://juny.vercel.app
 
 # Sitemaps
-Sitemap: https://juny.vercel.app/page.xml
+Sitemap: https://juny.vercel.app/sitemap.xml
+Sitemap: https://juny.vercel.app/util/sitemap.xml
