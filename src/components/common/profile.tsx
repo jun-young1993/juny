@@ -2,7 +2,6 @@
 import { GithubProfile, LeftRightContainer, AlignBox } from "juny-react-style";
 import MarkDownPreview from "@/components/markdown/mark-down";
 import {BlogContentInterface} from "@/types/blog.type";
-import {MarkdownPreviewProps} from "@uiw/react-markdown-preview";
 interface ProfileProps {
     data: BlogContentInterface[0]
 

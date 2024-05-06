@@ -23,7 +23,7 @@ export default async function Page({ params }:MutiSegmentSlugPageParams){
     const path = params.slug
         ? _.join(params.slug,'/')
         : undefined;
-    console.log("=>(page.tsx:27) path", path);
+    console.log("=>(page.ts:27) path", path);
     const data = await getData(path);
 
     return (

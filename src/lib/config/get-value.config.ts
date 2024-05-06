@@ -4,7 +4,6 @@ export function getEnv(
 	env = process.env
 ): string {
 	const value: string | undefined = env[key]
-	
 	if (value !== undefined) {
 		return value
 	}

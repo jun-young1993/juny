@@ -1,0 +1,10 @@
+# *
+User-agent: *
+Allow: /
+Disallow: /exclude
+
+# Host
+Host: https://juny.vercel.app
+
+# Sitemaps
+Sitemap: https://juny.vercel.app/page.xml
