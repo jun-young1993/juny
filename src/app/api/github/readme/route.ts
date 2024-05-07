@@ -19,7 +19,7 @@ export async function GET(request: Request)
 	})
 
 
-
+	
 	if(res.status !== constants.HTTP_STATUS_OK){
 		throw new Error(res.statusText);
 	}
