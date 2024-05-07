@@ -1,6 +1,6 @@
 const url = 'https://juny.vercel.app';
 module.exports = {
-    siteUrl: url, // .게시하는 site의 url
+    siteUrl: process.env.NEXT_PUBLIC_DOMAIN, // .게시하는 site의 url
     generateRobotsTxt: true, // robots.txt generate 여부 (자동생성 여부)
     sitemapSize: 7000, // sitemap별 최대 크기 (최대 크기가 넘어갈 경우 복수개의 sitemap으로 분리됨)
     changefreq: 'daily', // 페이지 주소 변경 빈도 (검색엔진에 제공됨) - always, daily, hourly, monthly, never, weekly, yearly 중 택 1
@@ -11,7 +11,7 @@ module.exports = {
     ], // page 등록 제외 페이지 주소
     robotsTxtOptions: {
         additionalSitemaps: [
-            `${url}/util/sitemap.xml`
+            `${process.env.NEXT_PUBLIC_DOMAIN}/util/sitemap.xml`
         ],
         // 정책 설정
         policies: [

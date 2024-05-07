@@ -1,6 +1,8 @@
 import { getEnv } from "./get-value.config";
 import { GithubConfig, GithubObsidianConfig } from "./type.config";
 
+export const DOMAIN = getEnv('NEXT_PUBLIC_DOMAIN');
+
 export const URL = getEnv('NEXT_PUBLIC_API_URL','localhost:3000');
 export const PROTOCOL = getEnv('NEXT_PUBLIC_API_PROTOCOL');
 export const ORIGIN = `${PROTOCOL}://${URL}`;

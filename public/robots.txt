@@ -4,8 +4,8 @@ Allow: /
 Disallow: /exclude
 
 # Host
-Host: https://juny.vercel.app
+Host: https://juny.blog
 
 # Sitemaps
-Sitemap: https://juny.vercel.app/sitemap.xml
-Sitemap: https://juny.vercel.app/util/sitemap.xml
+Sitemap: https://juny.blog/sitemap.xml
+Sitemap: https://juny.blog/util/sitemap.xml
