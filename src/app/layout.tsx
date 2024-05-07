@@ -4,9 +4,7 @@ import './globals.css'
 import RecoilRootProvider from '@/providers/only-rayout/recoil-root.provider'
 import RootLayoutWrapProvider from '@/providers/only-rayout/root-rayout-wrap.provider'
 import { ReactNode } from 'react'
-import {RecoilRoot} from "recoil";
-import {GithubModal} from "@/components/modal/github.modal";
-import {BlogModal} from "@/components/modal/blog.modal";
+import { GoogleAnalytics } from '@next/third-parties/google'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -29,6 +27,7 @@ export default function RootLayout({
             <RootLayoutWrapProvider>{children}</RootLayoutWrapProvider>
           </RecoilRootProvider>
         </body>
+        <GoogleAnalytics gaId={"G-85P217MXF2"}/>
     </html>
   )
 }

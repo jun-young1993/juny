@@ -13,12 +13,13 @@
     "format:fix": "prettier --write --ignore-path .gitignore ."
   },
   "dependencies": {
+    "@next/third-parties": "^14.2.3",
     "@uiw/react-markdown-preview": "^5.1.1",
     "juny-react-style": "^1.1.7",
     "juny-tsutil": "^1.0.5",
     "lodash": "^4.17.21",
     "moment": "^2.30.1",
-    "next": "14.1.3",
+    "next": "^14.2.3",
     "primereact": "^10.5.1",
     "react": "^18",
     "react-dom": "^18",
