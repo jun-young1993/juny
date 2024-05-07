@@ -5,6 +5,7 @@ import RecoilRootProvider from '@/providers/only-rayout/recoil-root.provider'
 import RootLayoutWrapProvider from '@/providers/only-rayout/root-rayout-wrap.provider'
 import { ReactNode } from 'react'
 import { GoogleAnalytics } from '@next/third-parties/google'
+import Script from "next/script";
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -28,6 +29,9 @@ export default function RootLayout({
           </RecoilRootProvider>
         </body>
         <GoogleAnalytics gaId={"G-85P217MXF2"}/>
+        <Script async
+                src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4656262305566191"
+                crossOrigin="anonymous"></Script>
     </html>
   )
 }
