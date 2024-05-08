@@ -16,7 +16,10 @@ async function getData(){
     
     for(let index=0; index<tree.length; index++){
         const currentData = tree[index];
-        if(currentData.path.startsWith('blog') && currentData.path.endsWith('.md')){
+        if((
+            currentData.path.startsWith('blog') ||
+            currentData.path.startsWith('calendar')
+        ) && currentData.path.endsWith('.md')){
             result.push({
                 url: `${DOMAIN}/${currentData.path}`,
                 lastModified: new Date(),
