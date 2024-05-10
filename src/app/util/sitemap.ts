@@ -28,6 +28,12 @@ async function getData(){
             })
         }
     }
+    result.push({
+        url: `${DOMAIN}/ads.txt`,
+        lastModified: new Date(),
+        changeFrequency: 'yearly',
+        priority: 1,
+    })
     return result;
 }
 
