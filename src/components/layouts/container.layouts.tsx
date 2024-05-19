@@ -11,6 +11,7 @@ interface ContainerLayoutInterface {
 	children: ReactNode
 	title?: string | ReactNode
 	type?: UnionsMenuType
+	backgroundColor: string
 }
 export default function ContainerLayout(props: ContainerLayoutInterface){
 	const router = useRouter();

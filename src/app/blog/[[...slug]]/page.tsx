@@ -13,7 +13,7 @@ async function getData(path?: string): Promise<BlogContentInterface[]> {
   
   const res = await fetch(API_URL(`${BlogPath}/${dynamicPath}`), {
       method: 'GET',
-      next: { revalidate: 3600 }
+      next: { cache: 'no-store' }
   });
 
   const result = await res.json();

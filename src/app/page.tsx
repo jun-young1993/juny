@@ -11,6 +11,6 @@ export default async function Page(){
   const data = await getData()
   
   return <div className='w-full h-full'>                
-    main
+
   </div>
 }

@@ -2,7 +2,8 @@ export const MenuType = {
     GITHUB : 'github',
     BLOG: 'blog',
     CALENDAR: 'calendar',
-    ME: 'me'
+    ME: 'me',
+    GUEST_BOOK: 'guest-book'
 
 } as const;
 

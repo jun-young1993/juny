@@ -7,27 +7,34 @@
 >
     <rect width="64" height="64" rx="8" fill="#E5E5E5" />
     <path
-            d="M16 22H48C49.1046 22 50 22.8954 50 24V46C50 47.1046 49.1046 48 48 48H16C14.8954 48 14 47.1046 14 46V24C14 22.8954 14.8954 22 16 22Z"
+            d="M16 48H48C49.1046 48 50 47.1046 50 46V18C50 16.8954 49.1046 16 48 16H16C14.8954 16 14 16.8954 14 18V46C14 47.1046 14.8954 48 16 48Z"
             fill="white"
             stroke="#333"
             strokeWidth="2"
     />
     <path
-            d="M20 16V20"
+            d="M18 24H46"
             stroke="#333"
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
     />
     <path
-            d="M44 16V20"
+            d="M18 32H46"
             stroke="#333"
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
     />
     <path
-            d="M14 28H50"
+            d="M18 40H46"
+            stroke="#333"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+    />
+    <path
+            d="M26 16V14C26 12.8954 26.8954 12 28 12H36C37.1046 12 38 12.8954 38 14V16"
             stroke="#333"
             strokeWidth="2"
             strokeLinecap="round"
