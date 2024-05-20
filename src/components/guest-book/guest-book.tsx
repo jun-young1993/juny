@@ -5,15 +5,15 @@ const GuestBook = () => {
 
     return (
        <ContainerLayout>
-                <GithubIssueReplyList
-                    gitPersonalAccessToken={process.env.NEXT_PUBLIC_GIT_HUB_TOKEN}
-                    gitOwner={process.env.NEXT_PUBLIC_GIT_HUB_OWNER}
-                    gitIssueNumber={process.env.NEXT_PUBLIC_GIT_HUB_ISSUE_NUMBER}
-                    gitRepo={process.env.NEXT_PUBLIC_GIT_HUB_ISSUE_REPO}
-                />
-                <GithubIssueComment
-                    gitPersonalAccessToken={process.env.NEXT_PUBLIC_GIT_HUB_TOKEN}
-                />
+           <GithubIssueComment
+               gitPersonalAccessToken={process.env.NEXT_PUBLIC_GIT_HUB_TOKEN}
+           />
+            <GithubIssueReplyList
+                gitPersonalAccessToken={process.env.NEXT_PUBLIC_GIT_HUB_TOKEN}
+                gitOwner={process.env.NEXT_PUBLIC_GIT_HUB_OWNER}
+                gitIssueNumber={process.env.NEXT_PUBLIC_GIT_HUB_ISSUE_NUMBER}
+                gitRepo={process.env.NEXT_PUBLIC_GIT_HUB_ISSUE_REPO}
+            />
        </ContainerLayout>
     )
 }

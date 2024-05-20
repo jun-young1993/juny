@@ -1,7 +1,7 @@
 # *
 User-agent: *
 Allow: /
-Disallow: /exclude
+Disallow: /api
 
 # Host
 Host: https://juny.blog
