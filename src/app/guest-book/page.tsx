@@ -10,11 +10,13 @@ export default async function Page({
 }: Params){
     const gitOAuthCode = searchParams.code;
     let personalAccessToken;
+    
     if(gitOAuthCode){
         const accessTokenAuthUrl:string = "https://github.com/login/oauth/access_token";
         const response = await fetch(accessTokenAuthUrl,{
             method: "POST",
             headers: {
+                'Accept': 'application/json',
                 'Content-Type': "application/json"
             },
             body: JSON.stringify({
@@ -24,10 +26,16 @@ export default async function Page({
                 redirect: 'follow'
             })
         });
-        const result = await response.text();
-        const data = result.split("&");
-        const accessToken = data[0].split("=")[1];
-        personalAccessToken = accessToken;
+        console.log(response.status);
+        const result = await response.json();
+        if(result.error){
+            personalAccessToken = undefined;
+        }
+        if(result.access_token){
+            personalAccessToken = result.access_token;
+        }
+        
+
     }
 
     return <GuestBook personalAccessToken={personalAccessToken}/>;
