@@ -9,7 +9,7 @@ export default async function Page({
     searchParams
 }: Params){
     const gitOAuthCode = searchParams.code;
-    let personalAccessToken;
+    let personalAccessToken: undefined | string;
     
     if(gitOAuthCode){
         const accessTokenAuthUrl:string = "https://github.com/login/oauth/access_token";
