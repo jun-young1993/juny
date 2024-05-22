@@ -7,7 +7,7 @@ interface GuestBookProps {
     personalAccessToken?: string
 }
 const GuestBook = ({personalAccessToken}:GuestBookProps) => {
-
+    const [reload, setReload] = useState("");
     return (
        <ContainerLayout>
            <GithubIssueComment
@@ -17,10 +17,14 @@ const GuestBook = ({personalAccessToken}:GuestBookProps) => {
                 gitRepo={process.env.NEXT_PUBLIC_GIT_HUB_ISSUE_REPO}
                gitPersonalAccessToken={personalAccessToken}
                onAutoComment={(response: Response)=>{
-
+                response.json()
+                .then((result) => {
+                        setReload(result.node_id);
+                });
                }}
            />
            <GithubIssueReplyList
+               reload={reload}
                direction={"asc"}
                gitPersonalAccessToken={process.env.NEXT_PUBLIC_GIT_HUB_TOKEN}
                gitOwner={process.env.NEXT_PUBLIC_GIT_HUB_OWNER}
