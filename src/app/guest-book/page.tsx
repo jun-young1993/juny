@@ -26,7 +26,7 @@ export default async function Page({
                 redirect: 'follow'
             })
         });
-        console.log(response.status);
+        
         const result = await response.json();
         if(result.error){
             personalAccessToken = undefined;
@@ -38,5 +38,5 @@ export default async function Page({
 
     }
 
-    return <GuestBook personalAccessToken={personalAccessToken}/>;
+    return <GuestBook gitUserPersonalAccessToken={personalAccessToken}/>;
 }

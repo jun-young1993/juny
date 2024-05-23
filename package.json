@@ -23,7 +23,7 @@
     "primereact": "^10.5.1",
     "react": "^18",
     "react-dom": "^18",
-    "react-github-issue": "^1.0.9",
+    "react-github-issue": "^1.0.10",
     "recoil": "^0.7.7"
   },
   "devDependencies": {
