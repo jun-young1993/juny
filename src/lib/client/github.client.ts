@@ -9,7 +9,8 @@ export async function GithubClient(url: string){
 			'Authorization': `Bearer ${GITHUB_OBSIDIAN_CONFIG.token}`,
 			'Accept': 'application/vnd.github+json',
 			'X-GitHub-Api-Version': GITHUB_OBSIDIAN_CONFIG.version
-		}
+		},
+		cache: 'no-store'
 	})
 	return res;
 }
