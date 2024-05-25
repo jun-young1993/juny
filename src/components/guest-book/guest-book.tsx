@@ -25,9 +25,7 @@ const GuestBook = ({gitUserPersonalAccessToken}:GuestBookProps) => {
         gitRepo: process.env.NEXT_PUBLIC_GIT_HUB_ISSUE_REPO,
         gitUserPersonalAccessToken: gitUserPersonalAccessToken
     });
-        
-    console.log(gitUserPersonalAccessToken);
-    
+
     return (
        <ContainerLayout>
            <GithubIssueComment
