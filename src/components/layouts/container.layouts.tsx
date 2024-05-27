@@ -11,6 +11,7 @@ interface ContainerLayoutInterface {
 	children: ReactNode
 	title?: string | ReactNode
 	type?: UnionsMenuType
+	onClose ?: () => void
 }
 export default function ContainerLayout(props: ContainerLayoutInterface){
 	const router = useRouter();
@@ -22,7 +23,12 @@ export default function ContainerLayout(props: ContainerLayoutInterface){
 					maximized={true}
 					title={props.title}
 					onClose={() => {
-						router.push('/')
+						if(props.onClose) {
+							props.onClose();
+						}else{
+							router.push('/')
+						}
+						
 					}}
 					onMinimize={() => {
 						pushDraggyModal(props.type);
@@ -30,7 +36,7 @@ export default function ContainerLayout(props: ContainerLayoutInterface){
 					}}
 				/>
 			</div>
-			<div className='w-full medium:h-[87%] mini:h-[85%] p-3 dark:text-slate-100 flex-1 overflow-y-scroll'>
+			<div className='w-full medium:h-[87%] mini:h-[85%] p-3 dark:text-slate-100 flex-1'>
 				{props.children}
 			</div>
 	      </div>
