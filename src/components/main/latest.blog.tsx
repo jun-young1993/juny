@@ -12,8 +12,8 @@ export default function LatestBlog(props:LatestBlogProps){
 	>
 		{props.latestBlog.map(({filename}) => {
 			return (
-				<Link href={`/${filename}`}>
-					<ListItem>{filename.split('/').pop()?.split('.').shift()}</ListItem>
+				<Link key={filename} href={`/${filename}`}>
+					<ListItem key={filename}>{filename.split('/').pop()?.split('.').shift()}</ListItem>
 				</Link>
 			)
 			// 

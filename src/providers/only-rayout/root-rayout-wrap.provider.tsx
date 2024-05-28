@@ -1,6 +1,6 @@
 'use client'
 
-import { ReactNode, useEffect } from 'react'
+import { ReactNode, useEffect, useRef } from 'react'
 import { ThemeType, useTheme } from '@/store/recoil/theme-mode.recoil'
 import NavBar from '@/components/root/navbar'
 import MenuBar from '@/components/root/menu-bar'
@@ -13,17 +13,17 @@ export default function RootLayoutWrapProvider({
 }) {
   const { theme, setTheme } = useTheme();
   
-  let isSystemDark = false;
+  let isSystemDark = useRef(false);
   const pathname = usePathname();
   const isRoot: boolean = pathname === '/';
   useEffect(() => {
 
     if(typeof window !== undefined){
-      isSystemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      isSystemDark.current = window.matchMedia('(prefers-color-scheme: dark)').matches;
     }
 
-    setTheme(isSystemDark ? ThemeType.DARK : ThemeType.LIGHT)
-  }, [])
+    setTheme(isSystemDark.current ? ThemeType.DARK : ThemeType.LIGHT)
+  }, [setTheme])
 
   useEffect(() => {
     document.body.classList.remove(
