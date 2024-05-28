@@ -5,6 +5,7 @@ import { ThemeType, useTheme } from '@/store/recoil/theme-mode.recoil'
 import NavBar from '@/components/root/navbar'
 import MenuBar from '@/components/root/menu-bar'
 import { usePathname } from 'next/navigation'
+import {StyleThemeProvider} from 'juny-react-style';
 
 export default function RootLayoutWrapProvider({
   children,
@@ -31,28 +32,32 @@ export default function RootLayoutWrapProvider({
     )
     document.body.classList.add(theme)
   }, [theme])
-
+  
   return (
-    <div className='flex flex-col h-full'>
-    <header className={`flex-none items-center justify-center ${isRoot ? '' : 'mini:hidden medium:block'}`}>
-      <div className="w-full">
-        <NavBar />
-      </div>
-    </header>
-    {/* className grow tailwind 작동 안함 */}
-    <main className='flex justify-center h-full' style={{
-      flexGrow: 1,
-      height: '80%'
-    }}>
-      <div className='w-full h-full py-2 mini:py-1'>
-        {children}
-      </div>
-    </main>
-    <footer className={`flex-none items-center justify-center h-[15%] ${isRoot ? '' : 'mini:hidden medium:block'}`}>
-      {/*<div className="container mx-auto opacity-0 h-full">*/}
-        <MenuBar />
-      {/*</div>*/}
-    </footer>
-  </div>
+    <StyleThemeProvider
+      mode={theme}
+    >
+      <div className='flex flex-col h-full'>
+      <header className={`flex-none items-center justify-center ${isRoot ? '' : 'mini:hidden medium:block'}`}>
+        <div className="w-full">
+          <NavBar />
+        </div>
+      </header>
+      {/* className grow tailwind 작동 안함 */}
+      <main className='flex justify-center h-full' style={{
+        flexGrow: 1,
+        height: '80%'
+      }}>
+        <div className='w-full h-full py-2 mini:py-1'>
+          {children}
+        </div>
+      </main>
+      <footer className={`flex-none items-center justify-center h-[15%] ${isRoot ? '' : 'mini:hidden medium:block'}`}>
+        {/*<div className="container mx-auto opacity-0 h-full">*/}
+          <MenuBar />
+        {/*</div>*/}
+      </footer>
+    </div>
+  </StyleThemeProvider>
   )
 }
