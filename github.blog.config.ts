@@ -30,7 +30,7 @@ const userConfig = GithubBlogConfig({
         'ads.txt'
     ],
     ignorePaths: [
-        /^Gemiso(\/.*)?$/,     // 'Private' 또는 'Private/*'
+        /^(\/.*)gemiso(\/.*)?$/,     // 'Private' 또는 'Private/*'
         /^(\/.*)Private(\/.*)?$/,     // 'Private' 또는 'Private/*'
     ]
 });
