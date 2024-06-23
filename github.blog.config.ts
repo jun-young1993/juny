@@ -37,6 +37,7 @@ const userConfig = GithubBlogConfig({
         cache: {
             revalidate : 3600
         }
-    }
+    },
+    wikiLink: 'images'
 });
 export default userConfig;
