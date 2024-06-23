@@ -32,6 +32,11 @@ const userConfig = GithubBlogConfig({
     ignorePaths: [
         /^(\/.*)gemiso(\/.*)?$/,     // 'Private' 또는 'Private/*'
         /^(\/.*)Private(\/.*)?$/,     // 'Private' 또는 'Private/*'
-    ]
+    ],
+    nextConfig: {
+        cache: {
+            revalidate : 3600
+        }
+    }
 });
 export default userConfig;
