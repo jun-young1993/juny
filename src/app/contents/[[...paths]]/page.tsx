@@ -1,23 +1,30 @@
 import {nextSlugGeneratePaths, nextSlugGitContentsPath} from "@/utills/next-slug.utills";
 import getUserConfig from "@/utills/config/get-user.config";
-import ContainerLayout from "@/components/ui/ContainerLayout";
+import ContainerLayout, { ContainerLayoutProps } from "@/components/ui/ContainerLayout";
 import ContentList from "@/components/structs/contents/content-list";
-import {redirect} from "next/navigation";
+import {notFound, redirect} from "next/navigation";
 import {GithubContentInterface} from "@/interfaces/github-user.interface";
-import APP_CONFIG from "@/utills/config/config";
+import APP_CONFIG, {NEXT_CONFIG} from "@/utills/config/config";
+import { PathsPageParams } from "@/interfaces/root-page.interface";
+import {constants} from "http2";
 
-interface Params {
-    params: {
-        paths?: string[] | []
-    }
+interface Params extends PathsPageParams{
+
 }
+
 async function getData(path: string): Promise<{data: GithubContentInterface[]}> {
     const {APP_END_POINT} = APP_CONFIG;
     const url = APP_END_POINT.repos.contents(path);
+
     if(url.endsWith('.md')){
         redirect(`/markdown-viewer/${path}`);
     }
-    const response = await fetch(url);
+    const response = await fetch(url,{
+        method: 'GET',
+        next: {revalidate: NEXT_CONFIG.cache.revalidate}
+    });
+
+
     const result = await response.json();
 
     return {
@@ -25,13 +32,16 @@ async function getData(path: string): Promise<{data: GithubContentInterface[]}> 
     }
 }
 export default async function Page({ params }:Params) {
-    const path = nextSlugGitContentsPath(params.paths);
-    const paths = nextSlugGeneratePaths(params.paths);
+    const {paths:pathArray, container} = params;
+    const path = nextSlugGitContentsPath(pathArray);
+    const paths = nextSlugGeneratePaths(pathArray);
 
     const {data} = await getData(path);
 
     return (
-        <ContainerLayout>
+        <ContainerLayout
+            {...container}
+        >
             <ContentList
                 paths={paths}
                 data={data.map((item) => {
@@ -41,7 +51,6 @@ export default async function Page({ params }:Params) {
                     }
                 })}
             >
-
             </ContentList>
         </ContainerLayout>
     )

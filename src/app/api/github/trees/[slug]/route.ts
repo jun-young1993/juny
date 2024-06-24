@@ -16,7 +16,8 @@ export async function GET(request: Request, {params}: Params): Promise<Response>
 		    } = APP_CONFIG;
 		const url = GIT_HUB_API_END_POINT.repos.trees(params.slug);
 		const response = await fetch(url,{
-			headers: GIT_HUB_API_REQUEST_HEADER
+			headers: GIT_HUB_API_REQUEST_HEADER,
+			cache: 'no-store'
 		});
 		const {status, statusText } = response;
 		if(status !== constants.HTTP_STATUS_OK){
@@ -24,14 +25,22 @@ export async function GET(request: Request, {params}: Params): Promise<Response>
 		}
 		const result:GithubUserInterface = await response.json();
 		return NextResponse.json(result,{
-			status: status
+			status: status,
+			headers: {
+				'Content-Type': 'application/json',
+				
+			}
 		})
 	}catch(error){
 		const errorMessage = error instanceof Error ? error.message : 'Unknown error';
 		return NextResponse.json({
 			error: errorMessage
 		}, {
-			status: constants.HTTP_STATUS_INTERNAL_SERVER_ERROR
+			status: constants.HTTP_STATUS_INTERNAL_SERVER_ERROR,
+			headers: {
+				'Content-Type': 'application/json',
+				
+			}
 		});
 	}
 }
