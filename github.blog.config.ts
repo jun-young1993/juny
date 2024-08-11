@@ -28,6 +28,10 @@ const userConfig = GithubBlogConfig({
     },{
         type: 'repository-contents',
         path: 'react-style/docs'
+    },{
+        type: 'repository-contents',
+        path: 'data-structure/docs/index',
+        title: 'data-structure'
     }],
     userSitemap: [
         'ads.txt'
