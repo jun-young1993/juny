@@ -46,5 +46,5 @@ export default async function TagPage(props: { params: Promise<{ tag: string }> 
 
   const tags = await getTagsWithPostCount()
 
-  return <ListLayout posts={posts.data} pagination={posts.pagination} tags={tags} />
+  return <ListLayout posts={posts.data} pagination={posts.pagination} tags={tags} title={''} />
 }
