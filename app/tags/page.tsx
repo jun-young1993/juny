@@ -3,7 +3,7 @@ import Tag from '@/components/Tag'
 import { slug } from 'github-slugger'
 import tagData from 'app/tag-data.json'
 import { genPageMetadata } from 'app/seo'
-import {getTagsWithPostCount} from "../../lib/weblog";
+import { getTagsWithPostCount } from '../../lib/weblog'
 
 export const metadata = genPageMetadata({ title: 'Tags', description: 'Things I blog about' })
 
@@ -23,10 +23,10 @@ export default async function Page() {
         </div>
         <div className="flex max-w-lg flex-wrap">
           {tagKeys.length === 0 && 'No tags found.'}
-          {tags.map(({id, name, postCount, color}) => {
+          {tags.map(({ id, name, postCount, color }) => {
             return (
               <div key={id} className="mb-2 mr-5 mt-2">
-                <Tag tagId={id} text={name} color={color}/>
+                <Tag tagId={id} text={name} color={color} />
                 <Link
                   href={`/tags/${id}`}
                   className="-ml-2 text-sm font-semibold uppercase text-gray-600 dark:text-gray-300"

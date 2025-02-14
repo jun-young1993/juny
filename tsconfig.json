@@ -40,6 +40,6 @@
     ".contentlayer/generated",
     ".contentlayer/generated/**/*.json",
     ".next/types/**/*.ts"
-  ],
+, "app/blog/page/[page]/page.tsx_backup"  ],
   "exclude": ["node_modules"]
 }

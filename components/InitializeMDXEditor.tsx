@@ -1,27 +1,28 @@
 'use client'
 import {
-    toolbarPlugin,
-    KitchenSinkToolbar,
-    listsPlugin,
-    quotePlugin,
-    headingsPlugin,
-    linkPlugin,
-    linkDialogPlugin,
-    imagePlugin,
-    tablePlugin,
-    thematicBreakPlugin,
-    frontmatterPlugin,
-    codeBlockPlugin,
-    sandpackPlugin,
-    codeMirrorPlugin,
-    directivesPlugin,
-    AdmonitionDirectiveDescriptor,
-    diffSourcePlugin,
-    markdownShortcutPlugin,
-    SandpackConfig,
-    MDXEditor,
+  toolbarPlugin,
+  KitchenSinkToolbar,
+  listsPlugin,
+  quotePlugin,
+  headingsPlugin,
+  linkPlugin,
+  linkDialogPlugin,
+  imagePlugin,
+  tablePlugin,
+  thematicBreakPlugin,
+  frontmatterPlugin,
+  codeBlockPlugin,
+  sandpackPlugin,
+  codeMirrorPlugin,
+  directivesPlugin,
+  AdmonitionDirectiveDescriptor,
+  diffSourcePlugin,
+  markdownShortcutPlugin,
+  SandpackConfig,
+  MDXEditor,
+  MDXEditorMethods,
 } from '@mdxeditor/editor'
-import {forwardRef} from "react";
+import { forwardRef } from 'react'
 
 const defaultSnippetContent = `
 export default function App() {
@@ -35,38 +36,40 @@ export default function App() {
 `.trim()
 
 const reactSandpackConfig: SandpackConfig = {
-    defaultPreset: 'react',
-    presets: [
-        {
-            label: 'React',
-            name: 'react',
-            meta: 'live',
-            sandpackTemplate: 'react',
-            sandpackTheme: 'light',
-            snippetFileName: '/App.js',
-            snippetLanguage: 'jsx',
-            initialSnippetContent: defaultSnippetContent,
-        },
-    ],
+  defaultPreset: 'react',
+  presets: [
+    {
+      label: 'React',
+      name: 'react',
+      meta: 'live',
+      sandpackTemplate: 'react',
+      sandpackTheme: 'light',
+      snippetFileName: '/App.js',
+      snippetLanguage: 'jsx',
+      initialSnippetContent: defaultSnippetContent,
+    },
+  ],
 }
 const allPlugins = (diffMarkdown: string) => [
-    toolbarPlugin({ toolbarContents: () => <KitchenSinkToolbar /> }),
-    listsPlugin(),
-    quotePlugin(),
-    headingsPlugin(),
-    linkPlugin(),
-    linkDialogPlugin(),
-    // eslint-disable-next-line @typescript-eslint/require-await
-    imagePlugin({ imageUploadHandler: async () => '/sample-image.png' }),
-    tablePlugin(),
-    thematicBreakPlugin(),
-    frontmatterPlugin(),
-    codeBlockPlugin({ defaultCodeBlockLanguage: 'txt' }),
-    sandpackPlugin({ sandpackConfig: reactSandpackConfig }),
-    codeMirrorPlugin({ codeBlockLanguages: { js: 'JavaScript', css: 'CSS', txt: 'text', tsx: 'TypeScript' } }),
-    directivesPlugin({ directiveDescriptors: [AdmonitionDirectiveDescriptor] }),
-    diffSourcePlugin({ viewMode: 'rich-text', diffMarkdown }),
-    markdownShortcutPlugin(),
+  toolbarPlugin({ toolbarContents: () => <KitchenSinkToolbar /> }),
+  listsPlugin(),
+  quotePlugin(),
+  headingsPlugin(),
+  linkPlugin(),
+  linkDialogPlugin(),
+
+  imagePlugin({ imageUploadHandler: async () => '/sample-image.png' }),
+  tablePlugin(),
+  thematicBreakPlugin(),
+  frontmatterPlugin(),
+  codeBlockPlugin({ defaultCodeBlockLanguage: 'txt' }),
+  sandpackPlugin({ sandpackConfig: reactSandpackConfig }),
+  codeMirrorPlugin({
+    codeBlockLanguages: { js: 'JavaScript', css: 'CSS', txt: 'text', tsx: 'TypeScript' },
+  }),
+  directivesPlugin({ directiveDescriptors: [AdmonitionDirectiveDescriptor] }),
+  diffSourcePlugin({ viewMode: 'rich-text', diffMarkdown }),
+  markdownShortcutPlugin(),
 ]
 type Props = { markdown: string }
 /**
@@ -75,15 +78,16 @@ type Props = { markdown: string }
  * @return {JSX.Element}
  * @constructor
  */
-const InitializeMDXEditor = forwardRef<HTMLDivElement, Props>(({ markdown }, ref) => {
-    return (
-        <MDXEditor
-            ref={ref}
-            markdown={markdown}
-            className="full-demo-mdxeditor dark:bg-white"
-            contentEditableClassName="prose max-w-full font-sans"
-            plugins={allPlugins(markdown)}
-        />
-    )
+const InitializeMDXEditor = forwardRef<MDXEditorMethods, Props>(({ markdown }, ref) => {
+  return (
+    <MDXEditor
+      ref={ref}
+      markdown={markdown}
+      className="full-demo-mdxeditor dark:bg-white"
+      contentEditableClassName="prose max-w-full font-sans"
+      plugins={allPlugins(markdown)}
+    />
+  )
 })
-export default  InitializeMDXEditor;
+InitializeMDXEditor.displayName = 'InitializeMDXEditor'
+export default InitializeMDXEditor

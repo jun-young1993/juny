@@ -5,9 +5,8 @@ import { formatDate } from 'pliny/utils/formatDate'
 import Link from '@/components/Link'
 import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
-import {WeblogPosts, TagsWithPostCount} from "../lib/weblog/types";
-import {MDXRemote} from "next-mdx-remote/rsc";
-
+import { WeblogPosts, TagsWithPostCount } from '../lib/weblog/types'
+import { MDXRemote } from 'next-mdx-remote/rsc'
 
 interface PaginationProps {
   totalPages: number
@@ -60,12 +59,7 @@ function Pagination({ totalPages, currentPage }: PaginationProps) {
   )
 }
 
-export default function ListLayoutWithTags({
-  posts,
-  title,
-  tags,
-  pagination,
-}: ListLayoutProps) {
+export default function ListLayoutWithTags({ posts, title, tags, pagination }: ListLayoutProps) {
   const pathname = usePathname()
 
   return (
@@ -90,17 +84,17 @@ export default function ListLayoutWithTags({
                 </Link>
               )}
               <ul>
-                {tags.map(({id, name, color, postCount}) => {
+                {tags.map(({ id, name, color, postCount }) => {
                   const link = `/tags/${id}`
                   return (
                     <li key={id} className="my-3">
-                        <Link
-                          href={link}
-                          className={`px-3 py-2 text-sm font-medium uppercase ${link === pathname ? 'text-primary-500' : 'text-gray-500' } hover:text-primary-500 dark:text-gray-300 dark:hover:text-primary-500`}
-                          aria-label={`View posts tagged ${id}`}
-                        >
-                          {`${name} (${postCount})`}
-                        </Link>
+                      <Link
+                        href={link}
+                        className={`px-3 py-2 text-sm font-medium uppercase ${link === pathname ? 'text-primary-500' : 'text-gray-500'} hover:text-primary-500 dark:text-gray-300 dark:hover:text-primary-500`}
+                        aria-label={`View posts tagged ${id}`}
+                      >
+                        {`${name} (${postCount})`}
+                      </Link>
                     </li>
                   )
                 })}
@@ -109,8 +103,7 @@ export default function ListLayoutWithTags({
           </div>
           <div>
             <ul>
-              {posts?.map(({id, title, tags, content, updatedAt}) => {
-
+              {posts?.map(({ id, title, tags, content, updatedAt }) => {
                 return (
                   <li key={id} className="py-5">
                     <article className="flex flex-col space-y-2 xl:space-y-0">
@@ -130,10 +123,12 @@ export default function ListLayoutWithTags({
                             </Link>
                           </h2>
                           <div className="flex flex-wrap py-2.5">
-                            {tags?.map((tag) => <Tag tagId={tag.id} key={tag.id} text={tag.name} color={tag.color} />)}
+                            {tags?.map((tag) => (
+                              <Tag tagId={tag.id} key={tag.id} text={tag.name} color={tag.color} />
+                            ))}
                           </div>
                         </div>
-                        <div className="prose max-w-none text-gray-500 dark:text-gray-400 line-clamp-3">
+                        <div className="prose line-clamp-3 max-w-none text-gray-500 dark:text-gray-400">
                           <MDXRemote source={content} />
                         </div>
                       </div>

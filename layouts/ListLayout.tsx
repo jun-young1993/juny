@@ -8,8 +8,8 @@ import type { Blog } from 'contentlayer/generated'
 import Link from '@/components/Link'
 import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
-import {MDXRemote} from "next-mdx-remote/rsc";
-import {WeblogPost, WeblogPosts} from "../lib/weblog/types";
+import { MDXRemote } from 'next-mdx-remote/rsc'
+import { WeblogPost, WeblogPosts } from '../lib/weblog/types'
 
 interface PaginationProps {
   totalPages: number
@@ -61,14 +61,8 @@ function Pagination({ totalPages, currentPage }: PaginationProps) {
   )
 }
 
-export default function ListLayout({
-  posts,
-  title,
-  pagination,
-}: ListLayoutProps) {
+export default function ListLayout({ posts, title, pagination }: ListLayoutProps) {
   const [searchValue, setSearchValue] = useState('')
-
-
 
   return (
     <>
@@ -106,7 +100,7 @@ export default function ListLayout({
         </div>
         <ul>
           {!posts?.length && 'No posts found.'}
-          {posts?.map(({sha, title, content, updatedAt}) => {
+          {posts?.map(({ sha, title, content, updatedAt }) => {
             const tags = ['default']
             return (
               <li key={sha} className="py-4">
@@ -128,7 +122,7 @@ export default function ListLayout({
                         {tags?.map((tag) => <Tag key={tag} text={tag} />)}
                       </div>
                     </div>
-                    <div className="prose max-w-none text-gray-500 dark:text-gray-400 line-clamp-3">
+                    <div className="prose line-clamp-3 max-w-none text-gray-500 dark:text-gray-400">
                       <MDXRemote source={content} />
                     </div>
                   </div>

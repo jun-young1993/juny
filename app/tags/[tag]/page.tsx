@@ -3,7 +3,7 @@ import ListLayout from '@/layouts/ListLayoutWithTags'
 import tagData from 'app/tag-data.json'
 import { genPageMetadata } from 'app/seo'
 import { Metadata } from 'next'
-import {getPosts, getTagsWithPostCount} from "../../../lib/weblog";
+import { getPosts, getTagsWithPostCount } from '../../../lib/weblog'
 
 export async function generateMetadata(props: {
   params: Promise<{ tag: string }>
@@ -32,14 +32,12 @@ export const generateStaticParams = async () => {
 }
 
 export default async function TagPage(props: { params: Promise<{ tag: string }> }) {
-
-
   const params = await props.params
 
   await getPosts({
     limit: 5,
     page: 1,
-    tagId: params.tag
+    tagId: params.tag,
   })
   const posts = await getPosts({
     limit: 5,
@@ -48,9 +46,5 @@ export default async function TagPage(props: { params: Promise<{ tag: string }> 
 
   const tags = await getTagsWithPostCount()
 
-  return <ListLayout
-            posts={posts.data}
-            pagination={posts.pagination}
-            tags={tags}
-  />
+  return <ListLayout posts={posts.data} pagination={posts.pagination} tags={tags} />
 }

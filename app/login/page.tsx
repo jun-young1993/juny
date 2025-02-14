@@ -1,5 +1,5 @@
-import Login from "@/components/Login";
+import Login from '@/components/Login'
 
-export default async function Page(){
-    return <Login />
+export default async function Page() {
+  return <Login />
 }

@@ -13,8 +13,8 @@ import PostBanner from '@/layouts/PostBanner'
 import { Metadata } from 'next'
 import siteMetadata from '@/data/siteMetadata'
 import { notFound } from 'next/navigation'
-import {getPost} from "../../../lib/weblog";
-import {MDXRemote} from "next-mdx-remote/rsc";
+import { getPost } from '../../../lib/weblog'
+import { MDXRemote } from 'next-mdx-remote/rsc'
 
 const defaultLayout = 'PostLayout'
 const layouts = {
@@ -28,7 +28,7 @@ export async function generateMetadata(props: {
 }): Promise<Metadata | undefined> {
   const params = await props.params
 
-  return;
+  return
   // return {
   //   title: post.title,
   //   description: post.summary,
@@ -53,25 +53,23 @@ export async function generateMetadata(props: {
   // }
 }
 
-
-
 export default async function Page(props: { params: Promise<{ slug: string }> }) {
-  const {slug: id} = await props.params
+  const { slug: id } = await props.params
   const postData = await getPost({
-    id: id
+    id: id,
   })
 
   if (!postData) {
     return notFound()
   }
 
-  const { title, content} = postData
+  const { title, content } = postData
 
   return (
-      <div className="prose max-w-none text-gray-500 dark:text-gray-400">
-        <div className="text-2xl">{title}</div>
-        <hr/>
-        <MDXRemote source={content} />
-      </div>
+    <div className="prose max-w-none text-gray-500 dark:text-gray-400">
+      <div className="text-2xl">{title}</div>
+      <hr />
+      <MDXRemote source={content} />
+    </div>
   )
 }
