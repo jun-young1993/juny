@@ -3,13 +3,11 @@
 import { useState } from 'react'
 import { usePathname } from 'next/navigation'
 import { formatDate } from 'pliny/utils/formatDate'
-import { CoreContent } from 'pliny/utils/contentlayer'
-import type { Blog } from 'contentlayer/generated'
 import Link from '@/components/Link'
 import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
 import { MDXRemote } from 'next-mdx-remote/rsc'
-import { WeblogPost, WeblogPosts } from '../lib/weblog/types'
+import { WeblogPosts } from '../lib/weblog/types'
 
 interface PaginationProps {
   totalPages: number
@@ -119,7 +117,9 @@ export default function ListLayout({ posts, title, pagination }: ListLayoutProps
                         </Link>
                       </h3>
                       <div className="flex flex-wrap">
-                        {tags?.map((tag) => <Tag key={tag} text={tag} />)}
+                        {tags?.map((tag) => (
+                          <Tag key={tag} text={tag} tagId={tag} color={'#ffffff'} />
+                        ))}
                       </div>
                     </div>
                     <div className="prose line-clamp-3 max-w-none text-gray-500 dark:text-gray-400">
@@ -133,7 +133,7 @@ export default function ListLayout({ posts, title, pagination }: ListLayoutProps
         </ul>
       </div>
       {pagination && pagination.totalPages > 1 && !searchValue && (
-        <Pagination currentPage={pagination.currentPage} totalPages={pagination.totalPages} />
+        <Pagination currentPage={pagination.page} totalPages={pagination.totalPages} />
       )}
     </>
   )

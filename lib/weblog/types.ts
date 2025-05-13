@@ -35,6 +35,7 @@ export type BasePost = {
   updatedAt: string
 }
 export interface WeblogPost extends BasePost {
+  sha: string
   tags: Tag[]
 }
 export type PaginationInfo = {
