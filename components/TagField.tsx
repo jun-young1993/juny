@@ -34,7 +34,7 @@ const TagField: React.FC<TagFieldProps> = ({ tags, onSelectTags }) => {
             />
             <label htmlFor={tag.id} className="text-sm font-medium text-gray-800">
               <TagWrap
-                id={tag.id}
+                tagId={tag.id}
                 text={tag.name}
                 color={tag.color}
                 onClick={() => handleCheckboxChange(tag.id)}
