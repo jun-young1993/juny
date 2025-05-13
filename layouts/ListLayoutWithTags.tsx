@@ -138,7 +138,7 @@ export default function ListLayoutWithTags({ posts, title, tags, pagination }: L
               })}
             </ul>
             {pagination && pagination.totalPages > 1 && (
-              <Pagination currentPage={pagination.currentPage} totalPages={pagination.totalPages} />
+              <Pagination currentPage={pagination.page} totalPages={pagination.totalPages} />
             )}
           </div>
         </div>
