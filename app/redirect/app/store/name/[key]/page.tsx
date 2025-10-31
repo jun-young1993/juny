@@ -17,7 +17,8 @@ export async function generateMetadata(props: PageProps): Promise<Metadata> {
   return genPageMetadata({
     title: `${appConfig.displayName}`,
     description:
-      appConfig.description ||
+      appConfig.description +
+      '\r\n' +
       `${appConfig.displayName} Download the app from App Store or Google Play.`,
     image: appConfig.appImageUrl ? appConfig.appImageUrl : undefined,
   })
