@@ -75,7 +75,7 @@ export default async function Page(props: PageProps) {
 
           <div className="flex flex-col gap-4 sm:flex-row sm:justify-center">
             {/* iOS App Store */}
-            {appConfig.appStoreUrl && (
+            {appConfig.appStoreUrl ? (
               <Link
                 href={appConfig.appStoreUrl}
                 target="_blank"
@@ -99,10 +99,34 @@ export default async function Page(props: PageProps) {
                   </div>
                 </div>
               </Link>
+            ) : (
+              <div className="flex flex-col items-center gap-2">
+                <div className="group flex cursor-not-allowed items-center justify-center gap-3 rounded-xl border-2 border-gray-300 bg-gray-100 px-6 py-4 opacity-60 dark:border-gray-600 dark:bg-gray-800">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gray-400 text-white">
+                    <svg
+                      className="h-6 w-6"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path d="M0 0h24v24H0z" fill="none" />
+                    </svg>
+                  </div>
+                  <div className="text-left">
+                    <div className="text-xs text-gray-500 dark:text-gray-400">다운로드</div>
+                    <div className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+                      App Store
+                    </div>
+                  </div>
+                </div>
+                <p className="text-xs text-gray-500 dark:text-gray-400">
+                  현재 iOS 버전 링크 공유가 불가능한 상태입니다
+                </p>
+              </div>
             )}
 
             {/* Google Play Store */}
-            {appConfig.googlePlayUrl && (
+            {appConfig.googlePlayUrl ? (
               <Link
                 href={appConfig.googlePlayUrl}
                 target="_blank"
@@ -126,6 +150,30 @@ export default async function Page(props: PageProps) {
                   </div>
                 </div>
               </Link>
+            ) : (
+              <div className="flex flex-col items-center gap-2">
+                <div className="group flex cursor-not-allowed items-center justify-center gap-3 rounded-xl border-2 border-gray-300 bg-gray-100 px-6 py-4 opacity-60 dark:border-gray-600 dark:bg-gray-800">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gray-400 text-white">
+                    <svg
+                      className="h-6 w-6"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path d="M0 0h24v24H0z" fill="none" />
+                    </svg>
+                  </div>
+                  <div className="text-left">
+                    <div className="text-xs text-gray-500 dark:text-gray-400">다운로드</div>
+                    <div className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+                      Google Play
+                    </div>
+                  </div>
+                </div>
+                <p className="text-xs text-gray-500 dark:text-gray-400">
+                  현재 안드로이드 버전 링크 공유가 불가능한 상태입니다
+                </p>
+              </div>
             )}
           </div>
 
