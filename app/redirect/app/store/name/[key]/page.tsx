@@ -15,8 +15,11 @@ export async function generateMetadata(props: PageProps): Promise<Metadata> {
   const appConfig = await getAppConfig(appName)
 
   return genPageMetadata({
-    title: `${appConfig.displayName} 다운로드`,
-    description: appConfig.description || `${appConfig.displayName} 앱을 다운로드하세요. App Store 또는 Google Play로 이동합니다.`,
+    title: `${appConfig.displayName}`,
+    description:
+      appConfig.description ||
+      `${appConfig.displayName} Download the app from App Store or Google Play.`,
+    image: appConfig.appImageUrl ? appConfig.appImageUrl : undefined,
   })
 }
 
@@ -29,8 +32,6 @@ export default async function Page(props: PageProps) {
   } else if (appConfig.googlePlayUrl && (await isAndroidPlatform())) {
     redirect(appConfig.googlePlayUrl)
   }
-
-
 
   return <div>Redirecting to {appName}</div>
 }

@@ -17,6 +17,8 @@ export type AppConfig = {
 
   googlePlayUrl?: string
 
+  appImageUrl?: string
+
   createdAt: Date
 
   updatedAt: Date
