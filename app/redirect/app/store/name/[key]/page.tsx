@@ -69,6 +69,9 @@ export default async function Page(props: PageProps) {
           <p className="mb-6 text-center text-lg font-semibold text-gray-900 dark:text-gray-100">
             아래 링크를 눌러 앱을 설치해주세요
           </p>
+          <p className="mb-4 text-center text-sm text-gray-600 dark:text-gray-400">
+            모바일 기기(iOS, Android)에서만 다운로드 및 설치가 가능합니다.
+          </p>
 
           <div className="flex flex-col gap-4 sm:flex-row sm:justify-center">
             {/* iOS App Store */}
