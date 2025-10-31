@@ -14,12 +14,12 @@ import { ThemeProviders } from './theme-providers'
 import { Metadata } from 'next'
 import { Toaster } from 'react-hot-toast'
 import { getMe } from '../lib/weblog'
-import { cookies, headers } from 'next/headers'
-import FloatingActionUserButton from '@/components/FloatingActionUserButton'
-import LoginIcon from '@/components/icons/login.icon'
-import Link from 'next/link'
-import PlusIcon from '@/components/icons/plus.icon'
-import BlogWriteIcon from '@/components/icons/blog-write.icon'
+import { cookies } from 'next/headers'
+// import FloatingActionUserButton from '@/components/FloatingActionUserButton'
+// import LoginIcon from '@/components/icons/login.icon'
+// import Link from 'next/link'
+// import PlusIcon from '@/components/icons/plus.icon'
+// import BlogWriteIcon from '@/components/icons/blog-write.icon'
 import { MeOperation } from 'lib/weblog/types'
 
 const space_grotesk = Space_Grotesk({
@@ -120,7 +120,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             <SearchProvider searchConfig={siteMetadata.search as SearchConfig}>
               <Header />
               <main className="mb-auto">{children}</main>
-              <FloatingActionUserButton
+              {/* <FloatingActionUserButton
                 items={[
                   <Link key={'/post/create'} href={'/post/create'}>
                     <BlogWriteIcon />
@@ -134,7 +134,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                     <LoginIcon className={'h-5 w-5'} />
                   </Link>
                 )}
-              </FloatingActionUserButton>
+              </FloatingActionUserButton> */}
             </SearchProvider>
             <Footer />
           </SectionContainer>
