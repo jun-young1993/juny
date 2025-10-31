@@ -6,13 +6,13 @@ import { Metadata } from 'next'
 
 interface PageProps {
   params: Promise<{
-    'app-name': string
+    key: string
   }>
 }
 
 export async function generateMetadata(props: PageProps): Promise<Metadata> {
-  const { 'app-name': appName } = await props.params
-  const appConfig = await getAppConfig(appName)
+  const { key } = await props.params
+  const appConfig = await getAppConfig(key)
 
   return genPageMetadata({
     title: `${appConfig.displayName}`,
@@ -24,8 +24,8 @@ export async function generateMetadata(props: PageProps): Promise<Metadata> {
 }
 
 export default async function Page(props: PageProps) {
-  const { 'app-name': appName } = await props.params
-  const appConfig = await getAppConfig(appName)
+  const { key } = await props.params
+  const appConfig = await getAppConfig(key)
 
   if (appConfig.appStoreUrl && (await isIOSPlatform())) {
     redirect(appConfig.appStoreUrl)
@@ -33,5 +33,5 @@ export default async function Page(props: PageProps) {
     redirect(appConfig.googlePlayUrl)
   }
 
-  return <div>Redirecting to {appName}</div>
+  return <div>Redirecting to {key}</div>
 }
