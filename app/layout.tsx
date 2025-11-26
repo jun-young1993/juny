@@ -15,6 +15,7 @@ import { Metadata } from 'next'
 import { Toaster } from 'react-hot-toast'
 import { getMe } from '../lib/weblog'
 import { cookies } from 'next/headers'
+import ConditionalLayout from '@/components/ConditionalLayout'
 // import FloatingActionUserButton from '@/components/FloatingActionUserButton'
 // import LoginIcon from '@/components/icons/login.icon'
 // import Link from 'next/link'
@@ -116,28 +117,24 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <body className="bg-white pl-[calc(100vw-100%)] text-black antialiased dark:bg-gray-950 dark:text-white">
         <ThemeProviders>
           <Analytics analyticsConfig={siteMetadata.analytics as AnalyticsConfig} />
-          <SectionContainer>
-            <SearchProvider searchConfig={siteMetadata.search as SearchConfig}>
-              <Header />
-              <main className="mb-auto">{children}</main>
-              {/* <FloatingActionUserButton
-                items={[
-                  <Link key={'/post/create'} href={'/post/create'}>
-                    <BlogWriteIcon />
-                  </Link>,
-                ]}
-              >
-                {user ? (
-                  <PlusIcon />
-                ) : (
-                  <Link href={'/login'}>
-                    <LoginIcon className={'h-5 w-5'} />
-                  </Link>
-                )}
-              </FloatingActionUserButton> */}
-            </SearchProvider>
-            <Footer />
-          </SectionContainer>
+          <ConditionalLayout>
+            {children}
+            {/* <FloatingActionUserButton
+              items={[
+                <Link key={'/post/create'} href={'/post/create'}>
+                  <BlogWriteIcon />
+                </Link>,
+              ]}
+            >
+              {user ? (
+                <PlusIcon />
+              ) : (
+                <Link href={'/login'}>
+                  <LoginIcon className={'h-5 w-5'} />
+                </Link>
+              )}
+            </FloatingActionUserButton> */}
+          </ConditionalLayout>
         </ThemeProviders>
         <Toaster
           position={'top-right'}

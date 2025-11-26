@@ -15,7 +15,7 @@ const ContentSecurityPolicy = `
   script-src 'self' 'unsafe-eval' 'unsafe-inline' giscus.app analytics.umami.is;
   style-src 'self' 'unsafe-inline';
   img-src * blob: data:;
-  media-src *.s3.amazonaws.com;
+  media-src *.s3.amazonaws.com *.s3.us-east-1.amazonaws.com https:;
   connect-src *;
   font-src 'self';
   frame-src giscus.app
@@ -86,6 +86,10 @@ module.exports = () => {
         {
           protocol: 'https',
           hostname: 'juny-api.kr',
+        },
+        {
+          protocol: 'https',
+          hostname: 'juny-babylog-assets.s3.us-east-1.amazonaws.com',
         },
       ],
       unoptimized,
