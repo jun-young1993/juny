@@ -15,7 +15,8 @@ export async function generateMetadata(props: PageProps): Promise<Metadata> {
   return genPageMetadata({
     title: shareMediaGroup.title,
     description:
-      shareMediaGroup.description || shareMediaGroup.s3Object.length + '개의 미디어를 공유합니다.',
+      'Share Code: ' + shareMediaGroup.shareCode + '\r\n' + shareMediaGroup.description ||
+      shareMediaGroup.s3Object.length + '개의 미디어를 공유합니다.',
     image: shareMediaGroup.s3Object[0].thumbnailUrl,
   })
 }
