@@ -9,10 +9,16 @@ interface PageProps {
   }>
 }
 
-export const metadata: Metadata = genPageMetadata({
-  title: '공유된 미디어 미리보기',
-  description: '공유 링크를 통해 전달된 이미지 또는 비디오를 미리 볼 수 있는 페이지입니다.',
-})
+export async function generateMetadata(props: PageProps): Promise<Metadata> {
+  const { id } = await props.params
+  const shareMediaGroup = await getSharedMediaGroup(id)
+  return genPageMetadata({
+    title: shareMediaGroup.title,
+    description:
+      shareMediaGroup.description || shareMediaGroup.s3Object.length + '개의 미디어를 공유합니다.',
+    image: shareMediaGroup.s3Object[0].thumbnailUrl,
+  })
+}
 
 /**
  * 공유 링크를 통해 전달된 이미지 또는 비디오를 미리 볼 수 있는 페이지입니다.
