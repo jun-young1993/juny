@@ -97,4 +97,3 @@ export default function CountdownTimer({ expiredAt, className = '' }: CountdownT
     </div>
   )
 }
-
