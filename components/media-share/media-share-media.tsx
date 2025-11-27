@@ -63,29 +63,26 @@ export default function MediaShareMedia({ media }: MediaShareMediaProps) {
           </div>
         </div>
       )}
-
       {media.fileType === 'video' ? (
         <video
-          src={media.url}
           controls
-          playsInline
           preload="metadata"
+          className="h-full max-h-[520px] min-h-[300px] w-full bg-black object-contain"
           onLoadedData={handleLoad}
           onError={handleError}
-          className="h-full max-h-[520px] w-full bg-black object-contain"
         >
-          {/* Caption track for accessibility - empty since caption files aren't available yet */}
+          <source src={media.lowResUrl} type={media.mimetype} />
           <track kind="captions" srcLang="ko" label="Korean" />
         </video>
       ) : (
         // S3 presigned URL은 Next.js Image 최적화가 실패하므로 일반 img 태그 사용
         // eslint-disable-next-line @next/next/no-img-element
         <img
-          src={media.url}
-          alt={media.metadata.caption || '미디어 이미지'}
+          src={media.lowResUrl}
+          alt={media?.metadata?.caption || '미디어 이미지'}
           onLoad={handleLoad}
           onError={handleError}
-          className="h-full max-h-[520px] w-full object-cover"
+          className="h-full max-h-[520px] min-h-[300px] w-full object-cover"
         />
       )}
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-black/10 mix-blend-multiply dark:from-black/45" />

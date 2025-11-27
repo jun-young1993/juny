@@ -1,4 +1,5 @@
 'use client'
+'use client'
 import { useState } from 'react'
 import MediaShareLayout from './media-share-layout'
 import { SharedMediaGroupResponse } from 'lib/s3-object/types'
@@ -9,9 +10,10 @@ interface MediaSharePageClientProps {
 
 export default function MediaSharePageClient({ shareMediaGroup }: MediaSharePageClientProps) {
   const [activeIndex, setActiveIndex] = useState(0)
-  const [isVerified, setIsVerified] = useState(false)
+  const [isVerified, setIsVerified] = useState(shareMediaGroup.shareCode ? false : true)
   const [inputCode, setInputCode] = useState('')
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
+  const [isGridOpen, setIsGridOpen] = useState(false)
 
   const { s3Object: medias = [], shareCode, expiredAt, title } = shareMediaGroup
   const hasMultiple = medias?.length > 1
@@ -24,6 +26,11 @@ export default function MediaSharePageClient({ shareMediaGroup }: MediaSharePage
       return
     }
     setErrorMessage('올바른 인증 코드를 입력해주세요.')
+  }
+
+  const handleSelectMedia = (index: number) => {
+    setActiveIndex(index)
+    setIsGridOpen(false)
   }
 
   if (isExpired) {
@@ -100,17 +107,23 @@ export default function MediaSharePageClient({ shareMediaGroup }: MediaSharePage
   }
 
   return (
-    <div className="flex min-h-[calc(100vh-6rem)] items-center justify-center px-4 py-10 sm:px-6 lg:px-8">
+    <div className="relative flex min-h-[calc(100vh-6rem)] items-center justify-center px-4 py-10 sm:px-6 lg:px-8">
       <div className="w-full space-y-4">
         <div className="relative">
-          <MediaShareLayout shareMediaGroup={shareMediaGroup} activeIndex={activeIndex} />
+          <MediaShareLayout
+            shareMediaGroup={shareMediaGroup}
+            activeIndex={activeIndex}
+            onOpenGrid={hasMultiple ? () => setIsGridOpen(true) : undefined}
+          />
 
           {hasMultiple && (
             <>
               <button
                 type="button"
                 aria-label="이전 미디어"
-                onClick={() => setActiveIndex((prev) => (prev - 1 + medias.length) % medias.length)}
+                onClick={() =>
+                  setActiveIndex((previous) => (previous - 1 + medias.length) % medias.length)
+                }
                 className="absolute left-0 top-1/2 flex -translate-x-1/2 -translate-y-1/2 rounded-full bg-black/30 p-2 text-white shadow-md backdrop-blur-md transition hover:bg-black/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 sm:left-3 sm:translate-x-0"
               >
                 <span className="inline-block rotate-180 text-lg leading-none">{'›'}</span>
@@ -119,7 +132,7 @@ export default function MediaSharePageClient({ shareMediaGroup }: MediaSharePage
               <button
                 type="button"
                 aria-label="다음 미디어"
-                onClick={() => setActiveIndex((prev) => (prev + 1) % medias.length)}
+                onClick={() => setActiveIndex((previous) => (previous + 1) % medias.length)}
                 className="absolute right-0 top-1/2 flex -translate-y-1/2 translate-x-1/2 rounded-full bg-black/30 p-2 text-white shadow-md backdrop-blur-md transition hover:bg-black/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 sm:right-3 sm:translate-x-0"
               >
                 <span className="inline-block text-lg leading-none">{'›'}</span>
@@ -155,7 +168,7 @@ export default function MediaSharePageClient({ shareMediaGroup }: MediaSharePage
                   <button
                     key={media.id ?? index}
                     type="button"
-                    onClick={() => setActiveIndex(index)}
+                    onClick={() => handleSelectMedia(index)}
                     className={`group flex min-w-[6.5rem] items-center gap-2 rounded-2xl px-2.5 py-1.5 text-[11px] shadow-sm transition ${
                       isActive
                         ? 'bg-gray-900 text-white shadow-lg shadow-gray-900/30 dark:bg-gray-100 dark:text-gray-900'
@@ -177,7 +190,7 @@ export default function MediaSharePageClient({ shareMediaGroup }: MediaSharePage
                           isActive ? 'font-semibold' : 'font-medium'
                         }`}
                       >
-                        {media.metadata.caption || `미디어 ${index + 1}`}
+                        {media?.metadata?.caption || `미디어 ${index + 1}`}
                       </span>
                       <span className="text-[10px] text-gray-400 dark:text-gray-500">
                         #{index + 1} · {media.fileType === 'video' ? 'Video' : 'Image'}
@@ -190,6 +203,74 @@ export default function MediaSharePageClient({ shareMediaGroup }: MediaSharePage
           </div>
         )}
       </div>
+
+      {isGridOpen && hasMultiple && (
+        <div className="fixed inset-0 z-40 flex items-end justify-center px-4 py-6 sm:items-center sm:px-6">
+          <button
+            type="button"
+            aria-label="썸네일 그리드 닫기"
+            onClick={() => setIsGridOpen(false)}
+            className="absolute inset-0 bg-black/50 backdrop-blur-sm transition-opacity"
+          />
+
+          <div className="animate-in fade-in-0 slide-in-from-bottom-2 relative z-50 w-full max-w-3xl rounded-3xl bg-white/95 p-4 shadow-2xl shadow-black/40 ring-1 ring-gray-200/80 transition-all dark:bg-gray-900/95 dark:ring-gray-700/70 sm:p-5">
+            <div className="mb-3 flex items-center justify-between gap-3">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-gray-500 dark:text-gray-400">
+                  Thumbnail Grid
+                </p>
+                <p className="text-sm font-medium text-gray-900 dark:text-gray-50">
+                  모든 미디어 ({medias.length})
+                </p>
+              </div>
+              <button
+                type="button"
+                aria-label="그리드 닫기"
+                onClick={() => setIsGridOpen(false)}
+                className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-700 shadow-sm transition hover:-translate-y-0.5 hover:border-gray-300 hover:bg-gray-50 hover:shadow-md dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100 dark:hover:border-gray-500 dark:hover:bg-gray-700"
+              >
+                <span className="text-base leading-none">×</span>
+              </button>
+            </div>
+
+            <div className="max-h-[60vh] overflow-y-auto pr-1">
+              <div className="grid grid-cols-3 gap-2 sm:grid-cols-4 md:grid-cols-5">
+                {medias.map((media, index) => {
+                  const isActive = index === activeIndex
+                  return (
+                    <button
+                      key={media.id ?? index}
+                      type="button"
+                      onClick={() => handleSelectMedia(index)}
+                      className={`group relative aspect-square overflow-hidden rounded-2xl bg-gray-100 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-lg dark:bg-gray-900/70 ${
+                        isActive
+                          ? 'ring-2 ring-blue-500 ring-offset-2 ring-offset-white dark:ring-offset-gray-900'
+                          : 'ring-1 ring-gray-200/70 dark:ring-gray-800/80'
+                      }`}
+                    >
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={media.thumbnailUrl || media.url}
+                        alt={media?.metadata?.caption || `미디어 ${index + 1}`}
+                        className="h-full w-full object-cover transition-transform duration-200 group-hover:scale-105"
+                      />
+                      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/45 via-black/5 to-transparent opacity-80 transition-opacity group-hover:opacity-90" />
+                      <div className="pointer-events-none absolute inset-x-1 bottom-1 flex items-center justify-between gap-1 rounded-xl bg-black/45 px-1.5 py-1 text-[10px] text-white shadow-sm backdrop-blur">
+                        <span className="line-clamp-1 font-medium">
+                          {media?.metadata?.caption || `미디어 ${index + 1}`}
+                        </span>
+                        <span className="shrink-0 rounded-full bg-white/10 px-1.5 py-[1px] text-[9px] uppercase tracking-wide">
+                          {media.fileType === 'video' ? 'VID' : 'IMG'}
+                        </span>
+                      </div>
+                    </button>
+                  )
+                })}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

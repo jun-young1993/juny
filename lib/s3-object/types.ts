@@ -7,8 +7,8 @@ export interface S3ObjectTag {
 
 export interface S3ObjectMetadata {
   id: string
-  caption: string
-  captionKo: string
+  caption?: string
+  captionKo?: string
 }
 
 export interface S3ObjectUser {
@@ -42,7 +42,7 @@ export interface S3Object {
   lowRes: S3Object | null
   tags: S3ObjectTag[]
   user: S3ObjectUser
-  metadata: S3ObjectMetadata
+  metadata?: S3ObjectMetadata
   likes: unknown[]
   replies: unknown[]
   reports: unknown[]

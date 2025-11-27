@@ -6,6 +6,7 @@ import Footer from '@/components/Footer'
 import SectionContainer from '@/components/SectionContainer'
 import { SearchProvider, SearchConfig } from 'pliny/search'
 import siteMetadata from '@/data/siteMetadata'
+import ThemeSwitch from './ThemeSwitch'
 
 interface ConditionalLayoutProps {
   children: React.ReactNode
@@ -17,7 +18,7 @@ export default function ConditionalLayout({ children }: ConditionalLayoutProps) 
 
   if (isSharePath) {
     // share 경로에서는 Header/Footer 없이 children만 렌더링
-    return <>{children}</>
+    return <main className="mb-auto">{children}</main>
   }
 
   // 일반 경로에서는 Header/Footer 포함

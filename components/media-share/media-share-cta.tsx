@@ -68,12 +68,6 @@ export default function MediaShareCTA({ primaryHref }: MediaShareCTAProps) {
           {isCopied ? '링크가 복사되었습니다' : '링크 공유 또는 복사'}
         </button>
       </div>
-
-      <div className="flex justify-center gap-3 text-xs text-gray-500 dark:text-gray-400">
-        <span className="rounded-full bg-gray-100 px-3 py-1 dark:bg-gray-800">
-          카카오톡 · iMessage · Instagram DM 미리보기 최적화
-        </span>
-      </div>
     </section>
   )
 }
