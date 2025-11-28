@@ -14,7 +14,7 @@ interface ConditionalLayoutProps {
 
 export default function ConditionalLayout({ children }: ConditionalLayoutProps) {
   const pathname = usePathname()
-  const isSharePath = pathname?.includes('/media/share') ?? false
+  const isSharePath = pathname?.includes('/media') ?? false
 
   if (isSharePath) {
     // share 경로에서는 Header/Footer 없이 children만 렌더링

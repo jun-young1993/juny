@@ -80,7 +80,7 @@ export interface SharedMediaGroupResponse {
   id: string
   userId: string
   expiredAt: string
-  shareCode: string
+  shareCode: string | null
   title: string
   description: string | null
   s3Object: S3Object[]
