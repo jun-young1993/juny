@@ -253,6 +253,7 @@ export default function MediaSharePageClient({ shareMediaGroup }: MediaSharePage
                         src={media.thumbnailUrl || media.url}
                         alt={media?.metadata?.caption || `미디어 ${index + 1}`}
                         className="h-full w-full object-cover transition-transform duration-200 group-hover:scale-105"
+                        loading="lazy"
                       />
                       <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/45 via-black/5 to-transparent opacity-80 transition-opacity group-hover:opacity-90" />
                       <div className="pointer-events-none absolute inset-x-1 bottom-1 flex items-center justify-between gap-1 rounded-xl bg-black/45 px-1.5 py-1 text-[10px] text-white shadow-sm backdrop-blur">
