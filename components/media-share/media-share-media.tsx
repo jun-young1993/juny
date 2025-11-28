@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { S3Object } from 'lib/s3-object/types'
 
 interface MediaShareMediaProps {
@@ -19,6 +19,17 @@ export default function MediaShareMedia({ media }: MediaShareMediaProps) {
     setIsLoading(false)
     setHasError(true)
   }
+
+  // 모바일에서 로딩이 멈추는 경우를 대비한 타임아웃
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (isLoading) {
+        setIsLoading(false)
+      }
+    }, 10000) // 10초 후 자동으로 로딩 해제
+
+    return () => clearTimeout(timer)
+  }, [isLoading])
 
   return (
     <div
@@ -66,19 +77,22 @@ export default function MediaShareMedia({ media }: MediaShareMediaProps) {
       {media.fileType === 'video' ? (
         <video
           controls
+          playsInline
           preload="metadata"
           className="h-full max-h-[520px] min-h-[300px] w-full bg-black object-contain"
           onLoadedData={handleLoad}
+          onCanPlay={handleLoad}
+          onLoadedMetadata={handleLoad}
           onError={handleError}
         >
-          <source src={media.lowResUrl} type={media.mimetype} />
+          <source src={media.lowResUrl || media.url} type={media.mimetype} />
           <track kind="captions" srcLang="ko" label="Korean" />
         </video>
       ) : (
         // S3 presigned URL은 Next.js Image 최적화가 실패하므로 일반 img 태그 사용
         // eslint-disable-next-line @next/next/no-img-element
         <img
-          src={media.lowResUrl}
+          src={media.lowResUrl || media.url}
           alt={media?.metadata?.caption || '미디어 이미지'}
           onLoad={handleLoad}
           onError={handleError}

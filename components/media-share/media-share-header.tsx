@@ -1,6 +1,7 @@
 import { S3Object, SharedMediaGroupResponse } from 'lib/s3-object/types'
 import Link from 'next/link'
 import ThemeSwitch from '../ThemeSwitch'
+import CountdownTimer from '../CountdownTimer'
 
 interface MediaShareHeaderProps {
   shareMediaGroup: SharedMediaGroupResponse
@@ -30,18 +31,10 @@ export default function MediaShareHeader({
         <span className="hidden text-xs text-gray-500 dark:text-gray-400 sm:inline">
           {shareMediaGroup.title}
         </span>
-
+        <CountdownTimer expiredAt={shareMediaGroup.expiredAt} />
         <ThemeSwitch />
       </div>
       <div className="flex items-center gap-2">
-        <div className="flex items-center gap-2">
-          <div className="text-right text-xs leading-tight sm:block">
-            <div className="font-medium text-gray-900 dark:text-gray-100">
-              {media.user.username}
-            </div>
-            {/* <div className="text-[11px] text-gray-500 dark:text-gray-400">공유한 크리에이터</div> */}
-          </div>
-        </div>
         {hasMultiple && onOpenGrid && (
           <button
             type="button"
