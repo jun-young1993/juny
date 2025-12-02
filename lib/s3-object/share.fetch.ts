@@ -1,5 +1,6 @@
 import { isWeblogError } from 'lib/weblog/type-guards'
 import { SharedMediaGroupResponse } from './types'
+import { notFound } from 'next/navigation'
 
 const endpoint = `${process.env.API_URL}/s3-object-shares`
 
@@ -59,5 +60,20 @@ export async function getSharedMediaGroup(
     cache: 'no-store',
     query: `/${id}?skip=${skip}&take=${take}`,
   })
+  if (result.status === 404) {
+    notFound()
+  }
+  return result.body
+}
+
+export async function getSharedSingleFetch(id: string): Promise<SharedMediaGroupResponse> {
+  const result = await sharedMediaGroupFetch<SharedMediaGroupResponse>({
+    method: 'GET',
+    cache: 'no-store',
+    query: `/object/${id}`,
+  })
+  if (result.status === 404) {
+    notFound()
+  }
   return result.body
 }

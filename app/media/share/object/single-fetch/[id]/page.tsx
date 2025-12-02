@@ -1,7 +1,7 @@
 import { genPageMetadata } from 'app/seo'
 import type { Metadata } from 'next'
 import MediaSharePageClient from '@/components/media-share/media-share-page-client'
-import { getSharedMediaGroup } from 'lib/s3-object/share.fetch'
+import { getSharedSingleFetch } from 'lib/s3-object/share.fetch'
 
 interface PageProps {
   params: Promise<{
@@ -11,8 +11,7 @@ interface PageProps {
 
 export async function generateMetadata(props: PageProps): Promise<Metadata> {
   const { id } = await props.params
-  const shareMediaGroup = await getSharedMediaGroup(id)
-
+  const shareMediaGroup = await getSharedSingleFetch(id)
   return genPageMetadata({
     title: shareMediaGroup.title,
     description:
@@ -31,7 +30,7 @@ export default async function Page(props: PageProps) {
   const { id } = await props.params
 
   // TODO: 실제 API 연동 시 id를 사용해 공유 미디어 그룹 데이터를 조회하도록 변경
-  const shareMediaGroup = await getSharedMediaGroup(id)
+  const shareMediaGroup = await getSharedSingleFetch(id)
 
   return <MediaSharePageClient shareMediaGroup={shareMediaGroup} />
 }
