@@ -76,6 +76,13 @@ export interface SharedMediaGroupUser extends S3ObjectUser {
   userGroups: UserGroup[]
 }
 
+interface PaginationInfo {
+  total: number
+  skip: number
+  take: number
+  totalPages: number
+}
+
 export interface SharedMediaGroupResponse {
   id: string
   userId: string
@@ -85,4 +92,5 @@ export interface SharedMediaGroupResponse {
   description: string | null
   s3Object: S3Object[]
   user: SharedMediaGroupUser
+  pagination: PaginationInfo
 }

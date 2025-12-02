@@ -49,11 +49,15 @@ async function sharedMediaGroupFetch<T>({
   }
 }
 
-export async function getSharedMediaGroup(id: string): Promise<SharedMediaGroupResponse> {
+export async function getSharedMediaGroup(
+  id: string,
+  skip: number = 0,
+  take: number = 10
+): Promise<SharedMediaGroupResponse> {
   const result = await sharedMediaGroupFetch<SharedMediaGroupResponse>({
     method: 'GET',
     cache: 'no-store',
-    query: `/${id}`,
+    query: `/${id}?skip=${skip}&take=${take}`,
   })
   return result.body
 }

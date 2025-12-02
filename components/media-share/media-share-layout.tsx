@@ -32,7 +32,7 @@ export default function MediaShareLayout({
       />
       <MediaShareMedia key={activeMedia.id ?? activeIndex} media={activeMedia} />
       <MediaShareMetadata shareMediaGroup={shareMediaGroup} media={activeMedia} />
-      <MediaShareCTA />
+      <MediaShareCTA media={activeMedia} />
     </div>
   )
 }

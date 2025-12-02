@@ -1,24 +1,36 @@
 'use client'
-'use client'
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import MediaShareLayout from './media-share-layout'
 import { SharedMediaGroupResponse } from 'lib/s3-object/types'
+import Pagenation from '../Pagenation'
 
 interface MediaSharePageClientProps {
   shareMediaGroup: SharedMediaGroupResponse
+  isVerifiedState?: boolean
+  initialGridOpen?: boolean
 }
 
-export default function MediaSharePageClient({ shareMediaGroup }: MediaSharePageClientProps) {
+export default function MediaSharePageClient({
+  shareMediaGroup,
+  isVerifiedState,
+  initialGridOpen,
+}: MediaSharePageClientProps) {
+  const router = useRouter()
   const [activeIndex, setActiveIndex] = useState(0)
-  const [isVerified, setIsVerified] = useState(shareMediaGroup.shareCode ? false : true)
+  const [isVerified, setIsVerified] = useState(
+    shareMediaGroup.shareCode === null || isVerifiedState === true
+  )
   const [inputCode, setInputCode] = useState('')
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
-  const [isGridOpen, setIsGridOpen] = useState(false)
+  const [isGridOpen, setIsGridOpen] = useState(initialGridOpen)
 
   const { s3Object: medias = [], shareCode, expiredAt, title } = shareMediaGroup
   const hasMultiple = medias?.length > 1
   const isExpired = new Date(expiredAt).getTime() < Date.now()
-
+  const currentPage =
+    Math.floor(shareMediaGroup.pagination.skip / shareMediaGroup.pagination.take) + 1
+  const totalPages = shareMediaGroup.pagination.totalPages
   const handleVerify = () => {
     if (inputCode.trim() === shareCode) {
       setIsVerified(true)
@@ -258,7 +270,7 @@ export default function MediaSharePageClient({ shareMediaGroup }: MediaSharePage
                       <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/45 via-black/5 to-transparent opacity-80 transition-opacity group-hover:opacity-90" />
                       <div className="pointer-events-none absolute inset-x-1 bottom-1 flex items-center justify-between gap-1 rounded-xl bg-black/45 px-1.5 py-1 text-[10px] text-white shadow-sm backdrop-blur">
                         <span className="line-clamp-1 font-medium">
-                          {media?.metadata?.caption || `미디어 ${index + 1}`}
+                          {media?.metadata?.caption || `${media.originalName} ${index + 1}`}
                         </span>
                         <span className="shrink-0 rounded-full bg-white/10 px-1.5 py-[1px] text-[9px] uppercase tracking-wide">
                           {media.fileType === 'video' ? 'VID' : 'IMG'}
@@ -269,6 +281,15 @@ export default function MediaSharePageClient({ shareMediaGroup }: MediaSharePage
                 })}
               </div>
             </div>
+            <Pagenation
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={(page) => {
+                router.push(
+                  `/media/share/object/${shareMediaGroup.id}/skip/${(page - 1) * shareMediaGroup.pagination.take}/take/${shareMediaGroup.pagination.take}/verify/${shareMediaGroup.shareCode}`
+                )
+              }}
+            />
           </div>
         </div>
       )}
