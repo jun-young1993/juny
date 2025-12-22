@@ -18,7 +18,7 @@ export default function MediaShareHeader({
 }: MediaShareHeaderProps) {
   return (
     <header className="mb-6 flex items-center justify-between gap-3">
-      <div className="flex items-center gap-3">
+      <div className="flex flex-col items-start gap-3 md:flex-row md:items-center">
         <div className="rounded-2xl bg-gradient-to-tr from-blue-500 via-indigo-500 to-purple-500 p-[2px] shadow-md">
           <Link
             href={`/redirect/app/store/name/${media.appName}`}
@@ -31,8 +31,10 @@ export default function MediaShareHeader({
         <span className="hidden text-xs text-gray-500 dark:text-gray-400 sm:inline">
           {shareMediaGroup.title}
         </span>
-        <CountdownTimer expiredAt={shareMediaGroup.expiredAt} />
-        <ThemeSwitch />
+        <div className="flex w-full flex-row items-center justify-between gap-2">
+          <CountdownTimer expiredAt={shareMediaGroup.expiredAt} />
+          <ThemeSwitch />
+        </div>
       </div>
       <div className="flex items-center gap-2">
         {hasMultiple && onOpenGrid && (

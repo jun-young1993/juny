@@ -55,5 +55,6 @@ export async function findS3Object(id: string): Promise<S3Object | null> {
     cache: 'no-store',
     query: `?id=${id}`,
   })
+
   return result.body ?? null
 }

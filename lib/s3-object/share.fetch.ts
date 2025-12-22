@@ -60,6 +60,7 @@ export async function getSharedMediaGroup(
     cache: 'no-store',
     query: `/${id}?skip=${skip}&take=${take}`,
   })
+
   if (result.status === 404) {
     notFound()
   }

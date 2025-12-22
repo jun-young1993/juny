@@ -232,7 +232,7 @@ export default function MediaSharePageClient({
                   Thumbnail Grid
                 </p>
                 <p className="text-sm font-medium text-gray-900 dark:text-gray-50">
-                  모든 미디어 ({medias.length})
+                  모든 미디어 ({shareMediaGroup.pagination.total})
                 </p>
               </div>
               <button
