@@ -12,11 +12,6 @@ import { Toaster } from 'react-hot-toast'
 import { getMe } from '../lib/weblog'
 import { cookies } from 'next/headers'
 import ConditionalLayout from '@/components/ConditionalLayout'
-// import FloatingActionUserButton from '@/components/FloatingActionUserButton'
-// import LoginIcon from '@/components/icons/login.icon'
-// import Link from 'next/link'
-// import PlusIcon from '@/components/icons/plus.icon'
-// import BlogWriteIcon from '@/components/icons/blog-write.icon'
 import { MeOperation } from 'lib/weblog/types'
 
 const space_grotesk = Space_Grotesk({

@@ -2,7 +2,17 @@ import { isWeblogError } from 'lib/weblog/type-guards'
 import { SharedMediaGroupResponse } from './types'
 import { notFound } from 'next/navigation'
 
-const endpoint = `${process.env.API_URL}/s3-object-shares`
+function getEndpoint() {
+  // Server (RSC/route handlers): call upstream directly with absolute URL
+  if (typeof window === 'undefined') {
+    const apiUrl = process.env.API_URL
+    if (!apiUrl) throw new Error('Missing API_URL env var')
+    return `${apiUrl.replace(/\/$/, '')}/s3-object-shares`
+  }
+
+  // Client: use same-origin proxy (API_URL is not exposed to browser)
+  return `/api/s3-object-shares`
+}
 
 interface SharedMediaGroupFetchOptions {
   method?: 'GET' | 'POST' | 'PUT' | 'DELETE'
@@ -18,6 +28,7 @@ async function sharedMediaGroupFetch<T>({
   query = '',
 }: SharedMediaGroupFetchOptions): Promise<{ status: number; body: T } | never> {
   try {
+    const endpoint = getEndpoint()
     const result = await fetch(`${endpoint}${query ? `${query}` : ''}`, {
       method,
       headers: {

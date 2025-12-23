@@ -28,9 +28,10 @@ export default function MediaSharePageClient({
   const { s3Object: medias = [], shareCode, expiredAt, title } = shareMediaGroup
   const hasMultiple = medias?.length > 1
   const isExpired = new Date(expiredAt).getTime() < Date.now()
-  const currentPage =
-    Math.floor(shareMediaGroup.pagination.skip / shareMediaGroup.pagination.take) + 1
-  const totalPages = shareMediaGroup.pagination.totalPages
+  const take = Number(shareMediaGroup.pagination.take) || 10
+  const skip = Number(shareMediaGroup.pagination.skip) || 0
+  const currentPage = Math.floor(skip / take) + 1
+  const totalPages = Number(shareMediaGroup.pagination.totalPages) || 1
   const handleVerify = () => {
     if (inputCode.trim() === shareCode) {
       setIsVerified(true)
@@ -286,7 +287,7 @@ export default function MediaSharePageClient({
               totalPages={totalPages}
               onPageChange={(page) => {
                 router.push(
-                  `/media/share/object/${shareMediaGroup.id}/skip/${(page - 1) * shareMediaGroup.pagination.take}/take/${shareMediaGroup.pagination.take}/verify/${shareMediaGroup.shareCode}`
+                  `/media/share/object/${shareMediaGroup.id}/skip/${(page - 1) * take}/take/${take}/verify/${shareMediaGroup.shareCode}`
                 )
               }}
             />

@@ -78,9 +78,9 @@ export interface SharedMediaGroupUser extends S3ObjectUser {
 
 interface PaginationInfo {
   total: number
-  skip: number
-  take: number
-  totalPages: number
+  skip: number | string
+  take: number | string
+  totalPages: number | string
 }
 
 export interface SharedMediaGroupResponse {
